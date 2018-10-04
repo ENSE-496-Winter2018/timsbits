@@ -9,7 +9,7 @@ namespace eideas.Controllers
     {
         public IActionResult Register()
         {
-            return View("~/Views/Auth/Register.cshtml", new LoginModel());
+            return View("~/Views/Auth/Registration.cshtml", new RegistrationModel());
         }
     }
 }

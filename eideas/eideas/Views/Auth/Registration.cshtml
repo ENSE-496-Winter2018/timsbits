@@ -1,29 +1,104 @@
 ﻿@model RegistrationModel
 @{
 }
+<head> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
 
-<div class="row">
-    <div class="col-xs-6 col-xs-offset-3 text-center">
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Email</span>
-            <input type="text" class="form-control" placeholder="Enter your email.." aria-describedby="basic-addon1" value="@Model.Email">
-        </div>
 
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
-            <span class="input-group-addon" id="basic-addon2"></span>
-        </div>
+		<!-- Website Font style -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
-        <div class="input-group">
-            <span class="input-group-addon">$</span>
-            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-            <span class="input-group-addon">.00</span>
-        </div>
+		
+	</head>
+<body>
+		<div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+					<form class="form-horizontal" method="post" action="#">
+						
+						<div class="form-group">
+							<label for="name" class="cols-sm-2 control-label">Your Name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
+								</div>
+							</div>
+						</div>
 
-        <label for="basic-url">Your vanity URL</label>
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon3">https://example.com/users/</span>
-            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-        </div>
-    </div>
-</div>
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Your Email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="division" class="cols-sm-2 control-label">Division</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                    <select id="division" class="form-control" name="division">
+                                    <option value="" selected disabled hidden>Select your divison</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="other">Other</option>
+                                    </select>
+								</div>
+							</div>
+						</div>
+
+                        <div class="form-group">
+							<label for="unit" class="cols-sm-2 control-label">Unit</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user-circle-o fa" aria-hidden="true"></i></span>
+                                    <select id="unit" class="form-control" name="unit">
+                                    <option value="" selected disabled hidden>Select your unit</option>
+                                    <option value="payroll">Payroll</option>
+                                    <option value="other">Other</option>
+                                    </select>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group ">
+							<button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+						</div>
+						<div class="login-register">
+				            <a href="">Login</a>
+				         </div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+	</body>

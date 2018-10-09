@@ -22,7 +22,7 @@ namespace eideas.Controllers
             string connectionstring = configuration.GetConnectionString("DefaultConnectionString");
 
             SqlConnection con = new SqlConnection(connectionstring);
-            SqlCommand command = new SqlCommand("Select count(*) from dbo.[User]", con);
+            SqlCommand command = new SqlCommand("Select count(*) from dbo.[BTUser]", con);
             con.Open();
             var count = (int)command.ExecuteScalar();
 

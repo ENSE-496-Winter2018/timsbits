@@ -1,0 +1,111 @@
+@page
+@model RegisterModel
+@{
+}
+
+<!--
+      <div class="homepage-hero-module">
+  <div class="video-container">
+    <div class="filter"></div>
+    <video autoplay loop class="fillWidth">
+      <source src="PATH_TO_MP4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+      <source src="PATH_TO_WEBM" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+    </video>
+    <div class="poster hidden">
+      <img src="PATH_TO_JPEG" alt="">
+    </div>
+  </div>
+</div>
+-->
+
+<video autoplay muted loop id="myVideo">
+    <source src="~/images/Pressure/Hill.mp4" type="video/mp4">
+</video>
+
+<div class="container">
+    <div class="row main">
+        <div class="main-login main-center">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Email" class="cols-sm-2 control-label">Your Email</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="division" class="cols-sm-2 control-label">Division</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <select id="division" class="form-control" name="division">
+                                <option value="" selected disabled hidden>Select your divison</option>
+                                <option value="finance">Finance</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="unit" class="cols-sm-2 control-label">Unit</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user-circle-o fa" aria-hidden="true"></i></span>
+                            <select id="unit" class="form-control" name="unit">
+                                <option value="" selected disabled hidden>Select your unit</option>
+                                <option value="payroll">Payroll</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Password" class="cols-sm-2 control-label">Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword" class="cols-sm-2 control-label">Confirm Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <input asp-for="Input.ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                </div>
+                <div class="login-register">
+                    <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -129,11 +129,6 @@ input::-webkit-input-placeholder {
    text-align: center;
 }
 
-.container{
-    margin-right: 0%;
-    
-}
-
 #myVideo {
     position: fixed;
     right: 0;

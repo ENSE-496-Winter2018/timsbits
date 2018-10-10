@@ -161,3 +161,27 @@ input::-webkit-input-placeholder {
 .register-container{
     margin-right: -56px;
 }
+
+.login-page-header{
+    position: absolute;
+    font-family: 'Josefin Sans', sans-serif;
+    padding-bottom: 9px;
+    margin: auto;
+    border-bottom: 1px solid #eee;
+    font-size: 100px;
+    padding-top: 200px;
+    text-align: left;
+    margin-left: 225px;
+}
+
+.welcome{
+    color:#fff;
+    margin-bottom: -40px;
+    font-weight: bolder;
+}
+
+.to-ideas{
+    color:#fff;
+    font-weight: lighter;
+
+}

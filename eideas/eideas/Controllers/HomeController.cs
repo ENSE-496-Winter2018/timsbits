@@ -29,7 +29,7 @@ namespace eideas.Controllers
             //user.Organization = "Testy";
 
             //db.Users.Update(user);
-
+            
             //user = db.Users.SingleOrDefault(u => u.Email == "test@test.com");
 
             //Console.Write(user.Organization);

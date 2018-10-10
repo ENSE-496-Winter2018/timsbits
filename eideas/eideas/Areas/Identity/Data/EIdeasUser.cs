@@ -1,16 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using eideas.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 
 namespace eideas.Models
 {
     public class EIdeasUser : IdentityUser
     {
-        [PersonalData]
-        public String Organization { get; set; }
-
-
+        
         public EIdeasUser()
         {
         }
+
+        public Division UserDivision {get; set;}
+
+        public Unit UserUnit {get; set;}      
+
+        public ICollection<Team> Teams { get; set; }
     }
 }

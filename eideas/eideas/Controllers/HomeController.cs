@@ -38,7 +38,7 @@ namespace eideas.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Ideas()
         {
             ViewData["Message"] = "Your contact page.";
 

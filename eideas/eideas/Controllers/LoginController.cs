@@ -1,4 +1,5 @@
-﻿using eideas.Models;
+﻿using eideas.Data;
+using eideas.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
@@ -19,14 +20,6 @@ namespace eideas.Controllers
 
         public IActionResult Login()
         {
-            string connectionstring = configuration.GetConnectionString("DefaultConnectionString");
-
-            SqlConnection con = new SqlConnection(connectionstring);
-            SqlCommand command = new SqlCommand("Select count(*) from dbo.[BTUser]", con);
-            con.Open();
-            var count = (int)command.ExecuteScalar();
-
-            con.Close();
             return View("~/Views/Auth/Login.cshtml", new LoginModel());
         }
     }

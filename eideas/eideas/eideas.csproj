@@ -11,8 +11,10 @@
 
   <ItemGroup>
     <Folder Include="Views\Auth\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Areas\Identity\Data\eideasIdentityDbContext.cs" />
+    <Compile Remove="Migrations\20181009215348_CreateIdentitySchema.cs" />
   </ItemGroup>
 </Project>

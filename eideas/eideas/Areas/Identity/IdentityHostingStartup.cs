@@ -20,8 +20,10 @@ namespace eideas.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("ApplicationDbContextConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>()
+                services.AddDefaultIdentity<EIdeasUser>()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+                services.AddScoped<SignInManager<EIdeasUser>, SignInManager<EIdeasUser>>();
             });
         }
     }

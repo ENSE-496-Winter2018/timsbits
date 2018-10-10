@@ -88,17 +88,32 @@ input::-webkit-input-placeholder {
 
 
 }
+.main-register{
+    background-color: #fff;
+   /* shadows and rounded borders */
+   -moz-border-radius: 2px;
+   -webkit-border-radius: 2px;
+   border-radius: 2px;
+   -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   float:right;
 
-.main-center{
+
+}
+
+.main-center-register{
     margin-top: 0px;
     max-width: 330px;
     padding: 40px 40px;
-    padding-bottom: 55px;
-   
-   
+    padding-bottom: 43px;
+}
 
-    
-
+.main-center-login{
+    margin-top: 0px;
+    max-width: 330px;
+    padding: 40px 40px;
+    padding-bottom: 235px;
 }
 
 .login-button{
@@ -139,4 +154,77 @@ input::-webkit-input-placeholder {
     size: 75%;
 }
 
+.login-container{
+    margin-right: -56px;
+}
 
+.register-container{
+    margin-right: -56px;
+}
+
+.login-page-header{
+    position: absolute;
+    font-family: 'Josefin Sans', sans-serif;
+    padding-bottom: 9px;
+    margin: auto;
+    border-bottom: 1px solid #eee;
+    font-size: 100px;
+    padding-top: 200px;
+    text-align: left;
+    margin-left: 225px;
+}
+
+.welcome{
+    color:#fff;
+    margin-bottom: -40px;
+    font-weight: bolder;
+}
+
+.to-ideas{
+    color:#fff;
+    font-weight: lighter;
+
+}
+
+.reviews {
+    color: #555;    
+    font-weight: bold;
+    margin: 10px auto 20px;
+}
+.notes {
+    color: #999;
+    font-size: 12px;
+}
+.media .media-object { max-width: 120px; }
+.media-body { position: relative; }
+.media-date { 
+    position: absolute; 
+    right: 25px;
+    top: 25px;
+}
+.media-date li { padding: 0; }
+.media-date li:first-child:before { content: ''; }
+.media-date li:before { 
+    content: '.'; 
+    margin-left: -2px; 
+    margin-right: 2px;
+}
+.media-comment { margin-bottom: 20px; }
+.media-replied { margin: 0 0 20px 50px; }
+.media-replied .media-heading { padding-left: 6px; }
+
+.btn-circle {
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 15px;
+    border-radius: 20px;
+}
+.btn-circle span { padding-right: 6px; }
+.embed-responsive { margin-bottom: 20px; }
+.tab-content {
+    padding: 50px 15px;
+    border: 1px solid #ddd;
+    border-top: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}

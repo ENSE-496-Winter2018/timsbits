@@ -3,8 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    
+    
     <title>@ViewData["Title"] - eideas</title>
 
     <environment include="Development">
@@ -42,10 +44,7 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-
-                    <li><a asp-area="" asp-controller="Login" asp-action="Login">Login</a></li>
-                    <li><a asp-area="" asp-controller="Registration" asp-action="Register">Register</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Ideas">Ideas</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

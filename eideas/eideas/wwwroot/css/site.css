@@ -88,17 +88,32 @@ input::-webkit-input-placeholder {
 
 
 }
+.main-register{
+    background-color: #fff;
+   /* shadows and rounded borders */
+   -moz-border-radius: 2px;
+   -webkit-border-radius: 2px;
+   border-radius: 2px;
+   -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   float:right;
 
-.main-center{
+
+}
+
+.main-center-register{
     margin-top: 0px;
     max-width: 330px;
     padding: 40px 40px;
-    padding-bottom: 55px;
-   
-   
+    padding-bottom: 43px;
+}
 
-    
-
+.main-center-login{
+    margin-top: 0px;
+    max-width: 330px;
+    padding: 40px 40px;
+    padding-bottom: 235px;
 }
 
 .login-button{
@@ -139,4 +154,10 @@ input::-webkit-input-placeholder {
     size: 75%;
 }
 
+.login-container{
+    margin-right: -56px;
+}
 
+.register-container{
+    margin-right: -56px;
+}

@@ -22,9 +22,9 @@
     <source src="~/images/Pressure/Hill.mp4" type="video/mp4">
 </video>
 
-<div class="container">
+<div class="register-container">
     <div class="row main">
-        <div class="main-login main-center">
+        <div class="main-register main-center-register">
             <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
@@ -41,9 +41,11 @@
                     <label asp-for="Input.Email" class="cols-sm-2 control-label">Your Email</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <input asp-for="Input.Email" class="form-control" />
-                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input asp-for="Input.Email" class="form-control" placeholder="Enter your Email" />
+                            
                         </div>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -78,9 +80,11 @@
                     <label asp-for="Input.Password" class="cols-sm-2 control-label">Password</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <input asp-for="Input.Password" class="form-control" />
-                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input asp-for="Input.Password" class="form-control" placeholder="Enter your password"/>
+                            
                         </div>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -88,9 +92,11 @@
                     <label asp-for="Input.ConfirmPassword" class="cols-sm-2 control-label">Confirm Password</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <input asp-for="Input.ConfirmPassword" class="form-control" />
-                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm your password" />
+                            
                         </div>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
                 </div>
 

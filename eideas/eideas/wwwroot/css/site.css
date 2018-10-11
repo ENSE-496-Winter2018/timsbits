@@ -9,7 +9,7 @@ body {
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
-    padding-right: 15px;
+    padding-right: 0;
 }
 
 /* Carousel */
@@ -85,6 +85,7 @@ input::-webkit-input-placeholder {
    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
    float:right;
+   
 
 
 }
@@ -103,17 +104,20 @@ input::-webkit-input-placeholder {
 }
 
 .main-center-register{
-    margin-top: 0px;
+    margin-top: -30px;
     max-width: 330px;
     padding: 40px 40px;
     padding-bottom: 43px;
+    min-height: 100vh;
+    padding-top:60px;
 }
 
 .main-center-login{
-    margin-top: 0px;
+    margin-top: -30px;
     max-width: 330px;
     padding: 40px 40px;
-    padding-bottom: 235px;
+    min-height: 100vh;
+    padding-top:60px;
 }
 
 .login-button{

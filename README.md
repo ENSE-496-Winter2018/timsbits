@@ -8,8 +8,12 @@
 # Braintrust
 
 **Contributors:** Reid Stancu, Simranjeet Kaur, Susmita Patel
+**Adopted By:** Taylor Petrychyn, Paul Hewitt, Danish Junaid, Brandon Eagan, Bryce Drew, Maksym Zabutnyy
 
-Repository for Team Braintrust's eIDEAS project (ENSE 885AS Spring/Summer 2018).
+Repository for Tim's Bits eIDEAS project (ENSE 496AB Fall 2018).
+
+Deliverables:
+* [MVP 1](./mvp1.md)
 
 Documents:
 

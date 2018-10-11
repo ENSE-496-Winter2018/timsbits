@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eideas.Data;
 
 namespace eideas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181011011705_model2")]
+    partial class model2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,13 +23,13 @@ namespace eideas.Migrations
 
             modelBuilder.Entity("eideas.Areas.Identity.Data.CommentUpDoot", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("EIdeasUserId");
 
                     b.Property<int>("IdeaCommentId");
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.HasKey("Id", "IdeaCommentId");
+                    b.HasKey("EIdeasUserId", "IdeaCommentId");
 
                     b.HasIndex("IdeaCommentId");
 
@@ -116,13 +118,13 @@ namespace eideas.Migrations
 
             modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaUpDoot", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("EIdeasUserId");
 
                     b.Property<int>("IdeaId");
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.HasKey("Id", "IdeaId");
+                    b.HasKey("EIdeasUserId", "IdeaId");
 
                     b.HasIndex("IdeaId");
 
@@ -346,7 +348,7 @@ namespace eideas.Migrations
                 {
                     b.HasOne("eideas.Models.EIdeasUser", "EIdeasUser")
                         .WithMany("CommentUpDoots")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("EIdeasUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("eideas.Areas.Identity.Data.IdeaComment", "IdeaComment")
@@ -383,7 +385,7 @@ namespace eideas.Migrations
                 {
                     b.HasOne("eideas.Models.EIdeasUser", "EideasUser")
                         .WithMany("IdeaUpdoots")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("EIdeasUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("eideas.Areas.Identity.Data.Idea", "Idea")

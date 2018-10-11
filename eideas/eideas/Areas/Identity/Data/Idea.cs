@@ -26,7 +26,9 @@ namespace eideas.Areas.Identity.Data
 
         public virtual ICollection<IdeaComment> IdeaComments { get; set; }
 
-        
+        public ICollection<IdeaSubscription> IdeaSubscriptions { get; set; }
+
+        public ICollection<IdeaUpDoot> IdeaUpdoots { get; set; }
 
     }
 }

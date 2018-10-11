@@ -23,6 +23,41 @@ namespace eideas.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            builder.Entity<Team>().HasMany(a => a.EideasUsers).WithOne(b => b.Team);
+
+            builder.Entity<EIdeasUser>().HasMany(a => a.IdeaComments).WithOne(b => b.EIdeasUser);
+
+            builder.Entity<Idea>().HasMany(a => a.IdeaComments).WithOne(b => b.Idea);
+
+
+            //IdeaSubscription mapping
+            builder.Entity<IdeaSubscription>().HasKey(a => new { a.Id,a.IdeaId });
+
+            builder.Entity<IdeaSubscription>().HasOne(a => a.EideasUser)
+                .WithMany(b => b.IdeaSubscriptions).HasForeignKey(c => c.Id);
+
+            builder.Entity<IdeaSubscription>().HasOne(a => a.Idea)
+                .WithMany(b => b.IdeaSubscriptions).HasForeignKey(c => c.IdeaId);
+
+
+            //IdeaUpdoot mapping
+            builder.Entity<IdeaUpDoot>().HasKey(a => new { a.Id, a.IdeaId });
+
+            builder.Entity<IdeaUpDoot>().HasOne(a => a.EideasUser)
+                .WithMany(b => b.IdeaUpdoots).HasForeignKey(c => c.Id);
+
+            builder.Entity<IdeaUpDoot>().HasOne(a => a.Idea)
+                .WithMany(b => b.IdeaUpdoots).HasForeignKey(c => c.IdeaId);
+
+            //CommentUpdoot mapping
+            builder.Entity<CommentUpDoot>().HasKey(a => new { a.Id, a.IdeaCommentId });
+
+            builder.Entity<CommentUpDoot>().HasOne(a => a.EIdeasUser)
+                .WithMany(b => b.CommentUpDoots).HasForeignKey(c => c.Id);
+
+            builder.Entity<CommentUpDoot>().HasOne(a => a.IdeaComment)
+                .WithMany(b => b.CommentUpDoots).HasForeignKey(c => c.IdeaCommentId);
+
 
         }
     }

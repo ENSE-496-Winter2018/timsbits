@@ -17,5 +17,13 @@ namespace eideas.Models
         public Unit UserUnit {get; set;}      
 
         public Team Team { get; set; }
+
+        public ICollection<IdeaComment> IdeaComments { get; set; }
+
+        public ICollection<IdeaSubscription> IdeaSubscriptions { get; set; }
+
+        public ICollection<IdeaUpDoot> IdeaUpdoots { get; set; }
+
+        public ICollection<CommentUpDoot> CommentUpDoots { get; set; }
     }
 }

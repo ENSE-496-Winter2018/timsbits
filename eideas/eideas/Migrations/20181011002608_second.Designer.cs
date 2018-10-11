@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eideas.Data;
 
 namespace eideas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181011002608_second")]
+    partial class second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +33,7 @@ namespace eideas.Migrations
 
                     b.HasKey("DivisionId");
 
-                    b.ToTable("Divisions");
+                    b.ToTable("Division");
                 });
 
             modelBuilder.Entity("eideas.Areas.Identity.Data.EIdeasUser", b =>
@@ -97,31 +99,6 @@ namespace eideas.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("eideas.Areas.Identity.Data.Idea", b =>
-                {
-                    b.Property<int>("IdeaId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("IdeaContent");
-
-                    b.Property<string>("IdeaName");
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<string>("UpdatedBy");
-
-                    b.Property<DateTime>("UpdatedDate");
-
-                    b.HasKey("IdeaId");
-
-                    b.ToTable("Ideas");
-                });
-
             modelBuilder.Entity("eideas.Areas.Identity.Data.Team", b =>
                 {
                     b.Property<int>("TeamId")
@@ -136,7 +113,7 @@ namespace eideas.Migrations
 
                     b.HasKey("TeamId");
 
-                    b.ToTable("Teams");
+                    b.ToTable("Team");
                 });
 
             modelBuilder.Entity("eideas.Areas.Identity.Data.Unit", b =>
@@ -151,7 +128,7 @@ namespace eideas.Migrations
 
                     b.HasKey("UnitId");
 
-                    b.ToTable("Units");
+                    b.ToTable("Unit");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

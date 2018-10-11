@@ -24,9 +24,6 @@ namespace eideas.Areas.Identity.Data
 
         public bool IsActive { get; set; }
 
-        public virtual ICollection<IdeaComment> IdeaComments { get; set; }
-
-        
-
+        //public virtual ICollection<IdeaComment> IdeaComments { get; set; }
     }
 }

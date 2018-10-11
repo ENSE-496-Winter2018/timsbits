@@ -1,4 +1,5 @@
 using System;
+using eideas.Areas.Identity.Data;
 using eideas.Data;
 using eideas.Models;
 using Microsoft.AspNetCore.Hosting;

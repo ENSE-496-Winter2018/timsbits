@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using eideas.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace eideas.Models
+namespace eideas.Areas.Identity.Data
 {
     public class EIdeasUser : IdentityUser
     {

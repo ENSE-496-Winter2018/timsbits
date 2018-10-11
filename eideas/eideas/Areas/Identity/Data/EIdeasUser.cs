@@ -16,6 +16,6 @@ namespace eideas.Models
 
         public Unit UserUnit {get; set;}      
 
-        public ICollection<Team> Teams { get; set; }
+        public Team Team { get; set; }
     }
 }

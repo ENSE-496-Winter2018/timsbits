@@ -7,7 +7,7 @@
 
 **Implemented By:** Taylor Petrychyn, Paul Hewitt, Danish Junaid, Brandon Eagan, Bryce Drew, Maksym Zabutnyy
 
-# Functional Requirements
+# MVP 1 Deliverables
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->

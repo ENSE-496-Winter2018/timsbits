@@ -61,7 +61,7 @@ Time Management:
   Brainstorming and idea development came before coding. Decisions about data schema and lo-fi layout changes identified early. Breaking     up roles and coding requirements to make sure that all bases are covered without overlap. 
 
 ### 1.3 References
-Refer to [UR Courses](https://urcourses.uregina.ca)  project requirement documentation.
+Refer to [Project Requirement Documentation](./Project_Requirements.pdf) and/or [UR Courses](https://urcourses.uregina.ca) for project requirement documentation.
 
 Also refer to the [Discussion Document](./discussions.md).
 

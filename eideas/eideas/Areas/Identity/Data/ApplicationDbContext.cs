@@ -17,6 +17,11 @@ namespace eideas.Data
         {
         }
 
+        public DbSet<Division> Divisions { get; set; }
+        public DbSet<Idea> Ideas { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Unit> Units { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using eideas.Models;
 using eideas.Data;
+using eideas.Areas.Identity.Data;
 
 namespace eideas.Controllers
 {
@@ -42,7 +43,28 @@ namespace eideas.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
-            return View();
+            ICollection<Idea> ideas = db.Ideas.ToList();
+
+            return View(new IdeaModel
+            {
+                Ideas = ideas,
+                NewIdea = new Idea()
+            });
+        }
+
+        [HttpPost]
+        public IActionResult Ideas(Idea newIdea) {
+
+            db.Ideas.Add(newIdea);
+            db.SaveChanges();
+
+            ICollection<Idea> ideas = db.Ideas.ToList();
+
+            return View(new IdeaModel
+            {
+                Ideas = ideas,
+                NewIdea = new Idea()
+            });
         }
 
         public IActionResult Privacy()

@@ -9,7 +9,7 @@ body {
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
-    padding-right: 15px;
+    padding-right: 0;
 }
 
 /* Carousel */
@@ -85,6 +85,7 @@ input::-webkit-input-placeholder {
    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
    float:right;
+   
 
 
 }
@@ -103,17 +104,20 @@ input::-webkit-input-placeholder {
 }
 
 .main-center-register{
-    margin-top: 0px;
+    margin-top: -30px;
     max-width: 330px;
     padding: 40px 40px;
     padding-bottom: 43px;
+    min-height: 100vh;
+    padding-top:60px;
 }
 
 .main-center-login{
-    margin-top: 0px;
+    margin-top: -30px;
     max-width: 330px;
     padding: 40px 40px;
-    padding-bottom: 235px;
+    min-height: 100vh;
+    padding-top:60px;
 }
 
 .login-button{
@@ -228,3 +232,61 @@ input::-webkit-input-placeholder {
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
 }
+
+.blinking-cursor {
+    font-weight: 100;
+    font-size: 30px;
+    color: white;
+    -webkit-animation: 1s blink step-end infinite;
+    -moz-animation: 1s blink step-end infinite;
+    -ms-animation: 1s blink step-end infinite;
+    -o-animation: 1s blink step-end infinite;
+    animation: 1s blink step-end infinite;
+    position: inherit;
+    margin-top: -29px;
+  }
+  
+  @keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: white;
+    }
+  }
+  
+  @-moz-keyframes blink {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color:white;
+    }
+  }
+  
+  @-webkit-keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: white;
+    }
+  }
+  
+  @-ms-keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: white;
+    }
+  }
+  
+  @-o-keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: white;
+    }
+  }

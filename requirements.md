@@ -39,7 +39,7 @@ The system requested by eHealth with the goal to improve the quality of healthca
 
 The proposed project accomplishes this by providing an application for employees to submit their ideas for improving existing organizational processes.  This increases visibility of individual and collaborative work.
 
-**Notice:** PDCA (**P**lan **D**o **C**heck **A**ct) has been substituted by PDEA (**P**lan **D**o **E**valuate **A**dapt). See [Discussion](./discussions.md) document.
+**Notice:** PDCA (**P**lan **D**o **C**heck **A**ct) has been substituted by PDEA (**P**lan **D**o **E**valuate **A**dopt). See [Discussion](./discussions.md) document.
 
 ### 1.1 Purpose
 The purpose of this document is to provide a backbone reference for the development of the eIDEAS project. The below sections are intended to provide a list of specific functional requirements that can lead to a minimum viable product.
@@ -56,7 +56,7 @@ Also refer to the [Discussion Document](./discussions.md).
  * The project will be under MIT license.
  * Balsamiq is used to creating mockup screens.
  * Vue.js will be used.
- * Source code and related documents will be hosted on a public [GitHub](https://github.com/rstancu/braintrust).
+ * Source code and related documents will be hosted on a public [GitHub](https://github.com/tpetrychyn/braintrust).
 
 ## 2 Methodology
 Using Balsamiq, mockups for the envisioned project were created. Each mockup screen helps to identify a piece of the functionality for the whole project.
@@ -125,12 +125,12 @@ Take mockups and break them down into individual requirements (1 sentence each),
 | FR6-3 | The system shall display the following for tracked ideas: idea id, submitter name, team, idea title, current PDEA status (via drop-down selection), 'GO' button.   |
 | FR6-3.1 | Double-clicking an idea in the **Tracked Ideas** tab shall display the idea's expanded view as defined by FR2-1.1 via pop-up.   |
 | FR6-3.2 | The **Tracked Ideas** tab shall allow the user to change the PDEA status of an idea for their respective team(s).   |
-| FR6-3.3 | The system shall provide a drop-down menu to select Plan/Do/Evaluate/Adapt/Abandon/Complete statuses for an idea.   |
+| FR6-3.3 | The system shall provide a drop-down menu to select Plan/Do/Evaluate/Adopt/Abandon/Complete statuses for an idea.   |
 | FR6-3.3.1 | The drop-down menu shall enforce the correct PDEA flow (e.g. P->D->E->A).   |
 | FR6-3.3.2 | The 'Complete' status shall only be available after the 'Evaluate' phase.   |
 | FR6-3.3.3 | The 'Abandon' status shall be available at any phase.   |
-| FR6-4 | After selection of each Plan/Do/Evaluate/Adapt/Abandon/Complete status a pop-up confirmation message will be presented after the user clicks the 'GO' button.   |
-| FR6-5 | After selecting the Adapt status the system shall require the user to type in an updated plan. This plan should reflect adaptations discovered in the Evaluation phase.   |
+| FR6-4 | After selection of each Plan/Do/Evaluate/Adopt/Abandon/Complete status a pop-up confirmation message will be presented after the user clicks the 'GO' button.   |
+| FR6-5 | After selecting the Adopt status the system shall require the user to type in an updated plan. This plan should reflect adoptations discovered in the Evaluation phase.   |
 | FR6-6 | After selecting the Abandon status the system shall require the user to type in a reason for abandonment.   |
 
 #### Table 7: Administrator Tools

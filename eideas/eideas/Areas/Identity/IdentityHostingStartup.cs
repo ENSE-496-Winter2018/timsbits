@@ -1,6 +1,7 @@
 using System;
 using eideas.Data;
 using eideas.Models;
+using eideas.Areas.Identity.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

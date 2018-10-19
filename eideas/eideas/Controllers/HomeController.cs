@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using eideas.Models;
 using eideas.Data;
 using eideas.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace eideas.Controllers
 {
     public class HomeController : Controller
     {
+    
         private readonly ApplicationDbContext db;
 
         public HomeController(ApplicationDbContext context) {
@@ -60,6 +62,8 @@ namespace eideas.Controllers
         [HttpPost]
         public IActionResult Ideas(Idea newIdea) {
 
+            newIdea.CreatedBy = User.Identity.Name;
+            newIdea.CreatedDate = DateTime.Now;
             db.Ideas.Add(newIdea);
             db.SaveChanges();
 

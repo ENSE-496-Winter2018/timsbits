@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -65,7 +67,9 @@ namespace eideas.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new EIdeasUser { UserName = Input.Email, Email = Input.Email };
+                var division = new Division (0, "Finance", DateTime.Now, null);
+                var unit = new Unit (0, "Payroll", DateTime.Now, null);
+                var user = new EIdeasUser { UserName = Input.Email, Email = Input.Email, UserDivision = division, UserUnit = unit};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

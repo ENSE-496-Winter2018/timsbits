@@ -8,6 +8,17 @@ namespace eideas.Areas.Identity.Data
 {
     public class Division 
     {
+        public Division(int did, string dname, DateTime cdate, ICollection<EIdeasUser> eusers)
+        {
+            DivisionId = did;
+            DivisionName = dname;
+            CreatedDate = cdate;
+            EideasUsers = eusers;
+        }
+
+        public Division()
+        {
+        }
         public int DivisionId { get; set; }
 
         public string DivisionName { get; set; }

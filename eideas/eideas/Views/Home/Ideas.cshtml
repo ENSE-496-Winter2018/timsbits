@@ -31,6 +31,19 @@
                                         <p class="media-comment">
                                             @idea.IdeaContent
                                         </p>
+                                        <h4 class="media-comment">
+                                            @foreach (var user in Model.Users)
+                                            {
+                                                @if (String.Equals(idea.CreatedBy, user.UserName, StringComparison.OrdinalIgnoreCase))
+                                                {
+                                                    @foreach (var divs in Model.Divisions)
+                                                    {
+
+                                                    }
+                                                    @user.UserDivision.DivisionName
+                                                }
+                                            }
+                                        </h4>
                                         <p class="media-comment">
                                             <--Place Holder for PDCA-->
                                         </p>

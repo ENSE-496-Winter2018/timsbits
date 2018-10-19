@@ -50,11 +50,27 @@ namespace eideas.Controllers
             if (db.Ideas != null)
                 ideas = db.Ideas.ToList();
             
-                
+            ICollection<EIdeasUser> users = new List<EIdeasUser>();
+
+            if (db.Users != null)
+                users = db.Users.ToList();   
+            
+            ICollection<Division> divisions = new List<Division>();
+
+            if (db.Divisions != null)
+                divisions = db.Divisions.ToList();  
+
+            ICollection<Unit> units = new List<Unit>();
+
+            if (db.Units != null)
+                units = db.Units.ToList(); 
 
             return View(new IdeaModel
             {
                 Ideas = ideas,
+                Users = users,
+                Divisions = divisions,
+                Units = units,
                 NewIdea = new Idea()
             });
         }
@@ -67,11 +83,32 @@ namespace eideas.Controllers
             db.Ideas.Add(newIdea);
             db.SaveChanges();
 
-            ICollection<Idea> ideas = db.Ideas.ToList();
+            ICollection<Idea> ideas = new List<Idea>();
+
+            if (db.Ideas != null)
+                ideas = db.Ideas.ToList();
+            
+            ICollection<EIdeasUser> users = new List<EIdeasUser>();
+
+            if (db.Users != null)
+                users = db.Users.ToList();   
+            
+            ICollection<Division> divisions = new List<Division>();
+
+            if (db.Divisions != null)
+                divisions = db.Divisions.ToList();  
+
+            ICollection<Unit> units = new List<Unit>();
+
+            if (db.Units != null)
+                units = db.Units.ToList(); 
 
             return View(new IdeaModel
             {
                 Ideas = ideas,
+                Users = users,
+                Divisions = divisions,
+                Units = units,
                 NewIdea = new Idea()
             });
         }

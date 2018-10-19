@@ -201,11 +201,7 @@ input::-webkit-input-placeholder {
 }
 .media .media-object { max-width: 120px; }
 .media-body { position: relative; }
-.media-date { 
-    position: absolute; 
-    right: 25px;
-    top: 25px;
-}
+.media-date { margin-bottom: 20px; }
 .media-date li { padding: 0; }
 .media-date li:first-child:before { content: ''; }
 .media-date li:before { 

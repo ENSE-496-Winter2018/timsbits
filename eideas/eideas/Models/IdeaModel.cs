@@ -8,7 +8,6 @@ namespace eideas.Models
     {
         public Idea NewIdea { get; set; }
         public ICollection<Idea> Ideas { get; set; }
-
         public IdeaModel()
         {
         }

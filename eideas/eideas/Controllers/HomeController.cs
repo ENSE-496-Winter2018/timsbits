@@ -43,7 +43,12 @@ namespace eideas.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
-            ICollection<Idea> ideas = db.Ideas.ToList();
+            ICollection<Idea> ideas = new List<Idea>();
+
+            if (db.Ideas != null)
+                ideas = db.Ideas.ToList();
+            
+                
 
             return View(new IdeaModel
             {

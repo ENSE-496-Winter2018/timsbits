@@ -59,11 +59,12 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <select id="division" class="form-control" name="division">
+                            @*<select id="division" class="form-control" name="division">
                                 <option value="" selected disabled hidden>Select your divison</option>
                                 <option value="finance">Finance</option>
                                 <option value="other">Other</option>
-                            </select>
+                            </select>*@
+                            <select id="division" class="form-control" asp-items="@Model.LstDivisions" name="division"></select>
                         </div>
                     </div>
                 </div>

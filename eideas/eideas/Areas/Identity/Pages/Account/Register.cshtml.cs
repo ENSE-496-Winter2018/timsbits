@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using eideas.Areas.Identity.Data;
+using eideas.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 
 namespace eideas.Areas.Identity.Pages.Account
@@ -20,18 +22,39 @@ namespace eideas.Areas.Identity.Pages.Account
         private readonly UserManager<EIdeasUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext db;
+
 
         public RegisterModel(
             UserManager<EIdeasUser> userManager,
             SignInManager<EIdeasUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            db = context;
+
+            LstDivisions = new List<SelectListItem>();
+
+            if (db.Divisions != null)
+            {
+                foreach (var division in db.Divisions)
+                {
+                    SelectListItem i = new SelectListItem();
+                    i.Value = division.DivisionId.ToString();
+                    i.Text = division.DivisionName;
+                    LstDivisions.Add(i);
+                }
+            }
+
         }
+
+        public List<SelectListItem> LstDivisions { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -55,12 +78,15 @@ namespace eideas.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            public SelectListItem selectedDivision { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
         }
+
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {

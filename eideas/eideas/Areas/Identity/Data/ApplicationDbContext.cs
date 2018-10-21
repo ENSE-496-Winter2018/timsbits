@@ -21,6 +21,12 @@ namespace eideas.Data
         public DbSet<Idea> Ideas { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<IdeaComment> IdeaComments { get; set; }
+        public DbSet<CommentUpDoot> CommentUpDoots { get; set; }
+        public DbSet<IdeaSubscription> IdeaSubscriptions { get; set; }
+
+
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -64,6 +70,12 @@ namespace eideas.Data
                 .WithMany(b => b.CommentUpDoots).HasForeignKey(c => c.IdeaCommentId);
 
 
+            builder.Entity<Idea>().HasOne(a => a.EIdeasUser).WithMany(b => b.Ideas);
+
+
         }
+
+
+       
     }
 }

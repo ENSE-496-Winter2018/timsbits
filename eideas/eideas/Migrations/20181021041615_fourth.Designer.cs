@@ -10,30 +10,30 @@ using eideas.Data;
 namespace eideas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181011011705_model2")]
-    partial class model2
+    [Migration("20181021041615_fourth")]
+    partial class fourth
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("eideas.Areas.Identity.Data.CommentUpDoot", b =>
                 {
-                    b.Property<string>("EIdeasUserId");
+                    b.Property<string>("Id");
 
                     b.Property<int>("IdeaCommentId");
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.HasKey("EIdeasUserId", "IdeaCommentId");
+                    b.HasKey("Id", "IdeaCommentId");
 
                     b.HasIndex("IdeaCommentId");
 
-                    b.ToTable("CommentUpDoot");
+                    b.ToTable("CommentUpDoots");
                 });
 
             modelBuilder.Entity("eideas.Areas.Identity.Data.Division", b =>
@@ -48,126 +48,10 @@ namespace eideas.Migrations
 
                     b.HasKey("DivisionId");
 
-                    b.ToTable("Division");
+                    b.ToTable("Divisions");
                 });
 
-            modelBuilder.Entity("eideas.Areas.Identity.Data.Idea", b =>
-                {
-                    b.Property<int>("IdeaId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("IdeaContent");
-
-                    b.Property<string>("IdeaName");
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<string>("UpdatedBy");
-
-                    b.Property<DateTime>("UpdatedDate");
-
-                    b.HasKey("IdeaId");
-
-                    b.ToTable("Idea");
-                });
-
-            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaComment", b =>
-                {
-                    b.Property<int>("IdeaCommentId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comment");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("EIdeasUserId");
-
-                    b.Property<int?>("IdeaId");
-
-                    b.Property<DateTime>("UpdatedDate");
-
-                    b.HasKey("IdeaCommentId");
-
-                    b.HasIndex("EIdeasUserId");
-
-                    b.HasIndex("IdeaId");
-
-                    b.ToTable("IdeaComment");
-                });
-
-            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaSubscription", b =>
-                {
-                    b.Property<string>("Id");
-
-                    b.Property<int>("IdeaId");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.HasKey("Id", "IdeaId");
-
-                    b.HasIndex("IdeaId");
-
-                    b.ToTable("IdeaSubscription");
-                });
-
-            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaUpDoot", b =>
-                {
-                    b.Property<string>("EIdeasUserId");
-
-                    b.Property<int>("IdeaId");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.HasKey("EIdeasUserId", "IdeaId");
-
-                    b.HasIndex("IdeaId");
-
-                    b.ToTable("IdeaUpDoot");
-                });
-
-            modelBuilder.Entity("eideas.Areas.Identity.Data.Team", b =>
-                {
-                    b.Property<int>("TeamId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<string>("CreatedDate");
-
-                    b.Property<string>("TeamManagerId");
-
-                    b.Property<string>("TeamName");
-
-                    b.HasKey("TeamId");
-
-                    b.HasIndex("TeamManagerId");
-
-                    b.ToTable("Team");
-                });
-
-            modelBuilder.Entity("eideas.Areas.Identity.Data.Unit", b =>
-                {
-                    b.Property<int>("UnitId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("UnitName");
-
-                    b.HasKey("UnitId");
-
-                    b.ToTable("Unit");
-                });
-
-            modelBuilder.Entity("eideas.Models.EIdeasUser", b =>
+            modelBuilder.Entity("eideas.Areas.Identity.Data.EIdeasUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -228,6 +112,118 @@ namespace eideas.Migrations
                     b.HasIndex("UserUnitUnitId");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("eideas.Areas.Identity.Data.Idea", b =>
+                {
+                    b.Property<int>("IdeaId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("IdeaContent");
+
+                    b.Property<string>("IdeaName");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTime>("UpdatedDate");
+
+                    b.HasKey("IdeaId");
+
+                    b.ToTable("Ideas");
+                });
+
+            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaComment", b =>
+                {
+                    b.Property<int>("IdeaCommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("EIdeasUserId");
+
+                    b.Property<int?>("IdeaId");
+
+                    b.Property<DateTime>("UpdatedDate");
+
+                    b.HasKey("IdeaCommentId");
+
+                    b.HasIndex("EIdeasUserId");
+
+                    b.HasIndex("IdeaId");
+
+                    b.ToTable("IdeaComments");
+                });
+
+            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaSubscription", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<int>("IdeaId");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.HasKey("Id", "IdeaId");
+
+                    b.HasIndex("IdeaId");
+
+                    b.ToTable("IdeaSubscriptions");
+                });
+
+            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaUpDoot", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<int>("IdeaId");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.HasKey("Id", "IdeaId");
+
+                    b.HasIndex("IdeaId");
+
+                    b.ToTable("IdeaUpDoot");
+                });
+
+            modelBuilder.Entity("eideas.Areas.Identity.Data.Team", b =>
+                {
+                    b.Property<int>("TeamId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<string>("CreatedDate");
+
+                    b.Property<string>("TeamName");
+
+                    b.HasKey("TeamId");
+
+                    b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("eideas.Areas.Identity.Data.Unit", b =>
+                {
+                    b.Property<int>("UnitId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("UnitName");
+
+                    b.HasKey("UnitId");
+
+                    b.ToTable("Units");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -346,9 +342,9 @@ namespace eideas.Migrations
 
             modelBuilder.Entity("eideas.Areas.Identity.Data.CommentUpDoot", b =>
                 {
-                    b.HasOne("eideas.Models.EIdeasUser", "EIdeasUser")
+                    b.HasOne("eideas.Areas.Identity.Data.EIdeasUser", "EIdeasUser")
                         .WithMany("CommentUpDoots")
-                        .HasForeignKey("EIdeasUserId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("eideas.Areas.Identity.Data.IdeaComment", "IdeaComment")
@@ -357,51 +353,7 @@ namespace eideas.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaComment", b =>
-                {
-                    b.HasOne("eideas.Models.EIdeasUser", "EIdeasUser")
-                        .WithMany("IdeaComments")
-                        .HasForeignKey("EIdeasUserId");
-
-                    b.HasOne("eideas.Areas.Identity.Data.Idea", "Idea")
-                        .WithMany("IdeaComments")
-                        .HasForeignKey("IdeaId");
-                });
-
-            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaSubscription", b =>
-                {
-                    b.HasOne("eideas.Models.EIdeasUser", "EideasUser")
-                        .WithMany("IdeaSubscriptions")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("eideas.Areas.Identity.Data.Idea", "Idea")
-                        .WithMany("IdeaSubscriptions")
-                        .HasForeignKey("IdeaId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaUpDoot", b =>
-                {
-                    b.HasOne("eideas.Models.EIdeasUser", "EideasUser")
-                        .WithMany("IdeaUpdoots")
-                        .HasForeignKey("EIdeasUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("eideas.Areas.Identity.Data.Idea", "Idea")
-                        .WithMany("IdeaUpdoots")
-                        .HasForeignKey("IdeaId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("eideas.Areas.Identity.Data.Team", b =>
-                {
-                    b.HasOne("eideas.Models.EIdeasUser", "TeamManager")
-                        .WithMany()
-                        .HasForeignKey("TeamManagerId");
-                });
-
-            modelBuilder.Entity("eideas.Models.EIdeasUser", b =>
+            modelBuilder.Entity("eideas.Areas.Identity.Data.EIdeasUser", b =>
                 {
                     b.HasOne("eideas.Areas.Identity.Data.Team", "Team")
                         .WithMany("EideasUsers")
@@ -416,6 +368,43 @@ namespace eideas.Migrations
                         .HasForeignKey("UserUnitUnitId");
                 });
 
+            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaComment", b =>
+                {
+                    b.HasOne("eideas.Areas.Identity.Data.EIdeasUser", "EIdeasUser")
+                        .WithMany("IdeaComments")
+                        .HasForeignKey("EIdeasUserId");
+
+                    b.HasOne("eideas.Areas.Identity.Data.Idea", "Idea")
+                        .WithMany("IdeaComments")
+                        .HasForeignKey("IdeaId");
+                });
+
+            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaSubscription", b =>
+                {
+                    b.HasOne("eideas.Areas.Identity.Data.EIdeasUser", "EideasUser")
+                        .WithMany("IdeaSubscriptions")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("eideas.Areas.Identity.Data.Idea", "Idea")
+                        .WithMany("IdeaSubscriptions")
+                        .HasForeignKey("IdeaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("eideas.Areas.Identity.Data.IdeaUpDoot", b =>
+                {
+                    b.HasOne("eideas.Areas.Identity.Data.EIdeasUser", "EideasUser")
+                        .WithMany("IdeaUpdoots")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("eideas.Areas.Identity.Data.Idea", "Idea")
+                        .WithMany("IdeaUpdoots")
+                        .HasForeignKey("IdeaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -426,7 +415,7 @@ namespace eideas.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("eideas.Models.EIdeasUser")
+                    b.HasOne("eideas.Areas.Identity.Data.EIdeasUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -434,7 +423,7 @@ namespace eideas.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("eideas.Models.EIdeasUser")
+                    b.HasOne("eideas.Areas.Identity.Data.EIdeasUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -447,7 +436,7 @@ namespace eideas.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("eideas.Models.EIdeasUser")
+                    b.HasOne("eideas.Areas.Identity.Data.EIdeasUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -455,7 +444,7 @@ namespace eideas.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("eideas.Models.EIdeasUser")
+                    b.HasOne("eideas.Areas.Identity.Data.EIdeasUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

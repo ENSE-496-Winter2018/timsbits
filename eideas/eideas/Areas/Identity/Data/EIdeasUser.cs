@@ -24,5 +24,9 @@ namespace eideas.Areas.Identity.Data
         public ICollection<IdeaUpDoot> IdeaUpdoots { get; set; }
 
         public ICollection<CommentUpDoot> CommentUpDoots { get; set; }
+
+        public ICollection<Idea> Ideas { get; set; }
+
+        public bool IsManager { get; set; }
     }
 }

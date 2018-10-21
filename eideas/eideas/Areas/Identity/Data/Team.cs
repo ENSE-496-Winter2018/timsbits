@@ -16,8 +16,6 @@ namespace eideas.Areas.Identity.Data
 
         public string CreatedDate { get; set; }
 
-       //public EIdeasUser TeamManager { get; set; }
-
-        public ICollection<EIdeasUser> EideasUsers { get; set; }
+        public ICollection<EIdeasUser> EideasUsers { get; set; }        
     }
 }

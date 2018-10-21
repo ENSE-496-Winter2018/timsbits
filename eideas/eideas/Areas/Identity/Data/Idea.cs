@@ -30,5 +30,7 @@ namespace eideas.Areas.Identity.Data
 
         public ICollection<IdeaUpDoot> IdeaUpdoots { get; set; }
 
+        public EIdeasUser EIdeasUser { get; set; }
+
     }
 }

@@ -8,11 +8,7 @@ namespace eideas.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Organization",
-                table: "AspNetUsers");
-
-            migrationBuilder.AddColumn<int>(
+             migrationBuilder.AddColumn<int>(
                 name: "TeamId",
                 table: "AspNetUsers",
                 nullable: true);
@@ -157,10 +153,7 @@ namespace eideas.Migrations
                 name: "UserUnitUnitId",
                 table: "AspNetUsers");
 
-            migrationBuilder.AddColumn<string>(
-                name: "Organization",
-                table: "AspNetUsers",
-                nullable: true);
+           
         }
     }
 }

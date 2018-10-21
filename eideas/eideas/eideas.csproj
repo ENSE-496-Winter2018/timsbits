@@ -6,6 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
   </ItemGroup>
 
@@ -15,5 +19,13 @@
   <ItemGroup>
     <Compile Remove="Areas\Identity\Data\eideasIdentityDbContext.cs" />
     <Compile Remove="Migrations\20181009215348_CreateIdentitySchema.cs" />
+    <Compile Remove="Migrations\20181011011705_model2.cs" />
+    <Compile Remove="Migrations\20181011011705_model2.Designer.cs" />
+    <Compile Remove="Migrations\20181011012845_model3.cs" />
+    <Compile Remove="Migrations\20181011012845_model3.Designer.cs" />
+    <Compile Remove="Migrations\20181021030944_fourth.cs" />
+    <Compile Remove="Migrations\20181021030944_fourth.Designer.cs" />
+    <Compile Remove="Migrations\20181021035958_fifth.cs" />
+    <Compile Remove="Migrations\20181021035958_fifth.Designer.cs" />
   </ItemGroup>
 </Project>

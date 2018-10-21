@@ -72,6 +72,8 @@ namespace eideas.Data
 
             builder.Entity<Idea>().HasOne(a => a.EIdeasUser).WithMany(b => b.Ideas);
 
+            builder.Entity<Division>().HasMany(a => a.Units).WithOne(b => b.Division).HasForeignKey(c => c.DivisionId);
+
 
         }
 

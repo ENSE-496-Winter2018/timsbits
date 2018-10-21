@@ -25,6 +25,10 @@ namespace eideas.Areas.Identity.Data
 
         public DateTime CreatedDate { get; set; }
 
+
+        public int DivisionId { get; set; }
+        public Division Division { get; set; }
+
         public ICollection<EIdeasUser> EideasUsers { get; set; }
     }
 }

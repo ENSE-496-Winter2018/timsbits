@@ -26,5 +26,9 @@ namespace eideas.Areas.Identity.Data
         public DateTime CreatedDate { get; set; }
 
         public ICollection<EIdeasUser> EideasUsers { get; set; }
+
+
+        public ICollection<Unit> Units { get; set; }
     }
+
 }

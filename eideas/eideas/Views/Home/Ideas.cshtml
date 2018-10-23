@@ -57,14 +57,14 @@
                                             </p>
                                             @if (String.Equals(idea.CreatedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
                                             {
-                                                <p>EDIT LINK PLACEHOLDER</p>
+                                                <button class="btn btn-success btn-circle text-uppercase" style="display:block" id="@("editButton"+@idea.IdeaId)" onclick=""><span class="glyphicon glyphicon-send"></span>Click To Edit</button>
                                             }
                                         </h4>
                                         
                                     </div>
                                     <button class="btn btn-success btn-circle text-uppercase" style="display:block" id="@("commentButton"+@idea.IdeaId)" onclick="@("displayCommentForm("+@idea.IdeaId))"><span class="glyphicon glyphicon-send"></span>Click To Comment</button>
                                     <div style="display:none" id="@("commentForm"+@idea.IdeaId)">
-                                          <div class="tab-pane" id="add-comment">
+                                          <div class="tab-pane" id="add-comment2">
                                             <form action="/AddComment" method="post" class="form-horizontal" id="commentForm" role="form"> 
                                             <div class="form-group">
     <--Gotta Change these -->                    <label asp-for="NewComment.Comment" class="col-sm-2 control-label">Comment</label>
@@ -87,7 +87,7 @@
                     </ul> 
                 </div>
 
-                <div class="tab-pane" id="add-comment">
+                <div class="tab-pane" id="add-comment3">
                     <form action="" method="post" class="form-horizontal" id="commentForm" role="form"> 
                         <div class="form-group">
                             <label asp-for="NewIdea.IdeaContent" class="col-sm-2 control-label">Idea</label>

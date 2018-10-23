@@ -47,21 +47,21 @@ YOu must use one of the 3 possible appsettings.json files found in ./eideas/eide
 
 You must populate the sql database with a insertion of at least 1 Division and Unit. Ideally we change this later to grab a seeded JSON file:
 
-SET XACT_ABORT ON;
-BEGIN TRANSACTION
-	INSERT INTO Divisions (DivisionName, CreatedDate)
-	VALUES (
-		'Finance',
-		GETDATE()
-	)
+  SET XACT_ABORT ON;
+  BEGIN TRANSACTION
+    INSERT INTO Divisions (DivisionName, CreatedDate)
+    VALUES (
+      'Finance',
+      GETDATE()
+    )
 
-	INSERT INTO Units (UnitName, CreatedDate, DivisionId)
-	VALUES (
-		'Payroll',
-		GETDATE(),
-		( SELECT DivisionId FROM Divisions WHERE DivisionId = SCOPE_IDENTITY() )
-	)
+    INSERT INTO Units (UnitName, CreatedDate, DivisionId)
+    VALUES (
+      'Payroll',
+      GETDATE(),
+      ( SELECT DivisionId FROM Divisions WHERE DivisionId = SCOPE_IDENTITY() )
+    )
 
-	select * from Divisions
-	select * from Units
-COMMIT
+    select * from Divisions
+    select * from Units
+  COMMIT

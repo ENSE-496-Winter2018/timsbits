@@ -13,6 +13,8 @@ namespace eideas.Areas.Identity.Data
 
         public Division UserDivision {get; set;}
 
+        public int UserDivisionDivisionId {get; set;}
+
         public Unit UserUnit {get; set;}      
 
         public Team Team { get; set; }

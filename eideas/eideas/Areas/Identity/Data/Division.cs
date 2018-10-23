@@ -27,7 +27,6 @@ namespace eideas.Areas.Identity.Data
 
         public ICollection<EIdeasUser> EideasUsers { get; set; }
 
-
         public ICollection<Unit> Units { get; set; }
     }
 

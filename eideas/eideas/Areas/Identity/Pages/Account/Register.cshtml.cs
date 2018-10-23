@@ -93,11 +93,10 @@ namespace eideas.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var division = new Division (0, "Finance", DateTime.Now, null);
-                var unit = new Unit (0, "Payroll", DateTime.Now, null);
-                var user = new EIdeasUser { UserName = Input.Email, Email = Input.Email, UserDivision = division, UserUnit = unit};
+            //    var division = new Division (4, "Finance", "20120618 10:34:09 AM", null);
+              //  var unit = new Unit (5, "Payroll", "20120618 10:34:09 AM", 4, null);
+                var user = new EIdeasUser { UserName = Input.Email, Email = Input.Email, UserDivisionDivisionId = 4};
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 

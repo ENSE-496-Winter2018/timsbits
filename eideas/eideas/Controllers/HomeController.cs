@@ -71,7 +71,8 @@ namespace eideas.Controllers
                 Users = users,
                 Divisions = divisions,
                 Units = units,
-                NewIdea = new Idea()
+                NewIdea = new Idea(),
+                NewComment = new IdeaComment()
             });
         }
 
@@ -109,7 +110,8 @@ namespace eideas.Controllers
                 Users = users,
                 Divisions = divisions,
                 Units = units,
-                NewIdea = new Idea()
+                NewIdea = new Idea(),
+                NewComment = new IdeaComment()
             });
         }
 

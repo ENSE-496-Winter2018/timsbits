@@ -10,6 +10,7 @@ namespace eideas.Models
     public class IdeaModel
     {
         public Idea NewIdea { get; set; }
+        public IdeaComment NewComment {get; set;}
         public ICollection<Idea> Ideas { get; set; }
         public ICollection<EIdeasUser> Users {get; set;} 
         public ICollection<Division> Divisions {get; set;} 

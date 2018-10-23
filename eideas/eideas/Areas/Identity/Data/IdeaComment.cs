@@ -9,7 +9,8 @@ namespace eideas.Areas.Identity.Data
     public class IdeaComment
     {
         public int IdeaCommentId { get; set; }
-
+        public int IdeaId { get; set; }
+        public int EIdeasUserId { get; set; }
         public string Comment { get; set; }
 
         public DateTime CreatedDate { get; set; }

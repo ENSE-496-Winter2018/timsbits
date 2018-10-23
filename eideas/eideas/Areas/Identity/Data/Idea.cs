@@ -22,6 +22,10 @@ namespace eideas.Areas.Identity.Data
 
         public DateTime UpdatedDate { get; set; }
 
+        //PDCA
+        //public int PDCAStatus {get; set}
+        //Please make this work
+
         public bool IsActive { get; set; }
 
         public virtual ICollection<IdeaComment> IdeaComments { get; set; }

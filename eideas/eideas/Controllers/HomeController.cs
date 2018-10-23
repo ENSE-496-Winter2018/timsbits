@@ -76,9 +76,12 @@ namespace eideas.Controllers
             });
         }
         [HttpPost]
-        public ActionResult Ideas(IdeaComment NewComment)
+        [Route("AddComment")]
+        public ActionResult Commented(IdeaComment NewComment)
         {
-            NewComment = new IdeaComment();
+            NewComment.CreatedDate = DateTime.Now;
+            db.IdeaComments.Add(NewComment);
+            db.SaveChanges();
 
              ICollection<Idea> ideas = new List<Idea>();
 

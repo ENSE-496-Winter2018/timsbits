@@ -40,3 +40,7 @@ Alternatively, we provide two PDF options. Both are fully interactive with click
 * [PDF - with linking hints](./mockups/eideas_with_link_hints.pdf) (hints --- this option displays all clickable elements and links in red)
 
 We recommend going through the PDF with hints first, then switch to the clean (no hints) version once the interface is familiar.
+
+#Setup
+
+YOu must use one of the 3 possible appsettings.json files found in ./eideas/eideas and customize it to your SQL Server setup. Following this name is "appsettings.json".

@@ -95,7 +95,7 @@ namespace eideas.Areas.Identity.Pages.Account
             {
             //    var division = new Division (4, "Finance", "20120618 10:34:09 AM", null);
               //  var unit = new Unit (5, "Payroll", "20120618 10:34:09 AM", 4, null);
-                var user = new EIdeasUser { UserName = Input.Email, Email = Input.Email, UserDivisionDivisionId = 4};
+                var user = new EIdeasUser { UserName = Input.Email, Email = Input.Email, UserDivisionDivisionId = 4, UserUnitUnitId = 5};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 {
                     _logger.LogInformation("User created a new account with password.");

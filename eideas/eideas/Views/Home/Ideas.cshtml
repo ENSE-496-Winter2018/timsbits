@@ -38,9 +38,18 @@
                                                 {
                                                     @foreach (var divs in Model.Divisions)
                                                     {
-
+                                                        @if(divs.DivisionId == user.UserDivisionDivisionId)
+                                                        {
+                                                            @divs.DivisionName
+                                                        }
                                                     }
-                                                    @user.UserDivisionDivisionId
+                                                     @foreach (var units in Model.Units)
+                                                    {
+                                                        @if(units.UnitId == user.UserUnitUnitId)
+                                                        {
+                                                            @units.UnitName
+                                                        }
+                                                    }
                                                 }
                                             }
                                         </h4>

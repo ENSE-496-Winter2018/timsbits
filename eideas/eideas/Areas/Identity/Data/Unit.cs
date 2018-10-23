@@ -8,12 +8,13 @@ namespace eideas.Areas.Identity.Data
 {
     public class Unit
     {
-        public Unit(int uid, string uname, DateTime cdate, ICollection<EIdeasUser> eusers)
+        public Unit(int uid, string uname, DateTime cdate, int did, ICollection<EIdeasUser> eusers)
         {
             UnitId = uid;
             UnitName = uname;
             CreatedDate = cdate;
             EideasUsers = eusers;
+            DivisionId = did;
         }
 
         public Unit()

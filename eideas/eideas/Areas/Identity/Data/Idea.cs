@@ -23,7 +23,7 @@ namespace eideas.Areas.Identity.Data
         public DateTime UpdatedDate { get; set; }
 
         //PDCA
-        //public int PDCAStatus {get; set}
+        public PDCA PDCA { get; set; }
         //Please make this work
 
         public bool IsActive { get; set; }

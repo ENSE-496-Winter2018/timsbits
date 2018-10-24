@@ -71,6 +71,17 @@ namespace eideas.Data
 
             builder.Entity<Division>().HasMany(a => a.Units).WithOne(b => b.Division).HasForeignKey(c => c.DivisionId);
 
+            builder.Entity<EIdeasUser>()
+                   .HasOne(u => u.UserUnit)
+                   .WithMany()
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<EIdeasUser>()
+                   .HasOne(u => u.UserDivision)
+                   .WithMany()
+                   .OnDelete(DeleteBehavior.Restrict);
+
+
             builder.Entity<Division>().HasData(
                 new Division { DivisionId = 1, DivisionName = "Finance" },
                 new Division { DivisionId = 2, DivisionName = "Marketing" },

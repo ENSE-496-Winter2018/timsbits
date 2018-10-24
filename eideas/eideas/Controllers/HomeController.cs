@@ -45,7 +45,7 @@ namespace eideas.Controllers
         {
             ViewData["Message"] = "Your Ideas page.";
 
-            ICollection<Idea> ideas =db.Ideas.ToList();
+            ICollection<Idea> ideas = db.Ideas.ToList();
             
             ICollection<EIdeasUser> users = new List<EIdeasUser>();
 

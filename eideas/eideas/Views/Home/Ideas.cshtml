@@ -37,45 +37,46 @@
                                   @foreach (var idea in Model.Ideas)
                             {
                                 // cut for brevity, need to add back more code from original
-                              <div class="well well-lg">
-                                  <h4 class="media-heading text-uppercase reviews"> @idea.CreatedBy </h4>
-                                  <ul class="media-date text-uppercase reviews">
-                                      @idea.CreatedDate
-                                  </ul>
-                                  <p class="media-comment">
-                                      @idea.IdeaContent
-                                  </p>
-                                  <h4 class="media-comment">
-                                      @foreach (var user in Model.Users) // Use Order By to List by Top Idea Once Upvotes work
-                                {
-                                  @if (String.Equals(idea.CreatedBy, user.UserName, StringComparison.OrdinalIgnoreCase))
-                            {
-                              @foreach (var divs in Model.Divisions)
-                        {
-                          @if (divs.DivisionId == user.UserDivisionDivisionId)
-                    {
-                      @divs.DivisionName
-            }
-                }
-                              @foreach (var units in Model.Units)
-                        {
-                          @if (units.UnitId == user.UserUnitUnitId)
-                    {
-                      @units.UnitName
-            }
-                }
-                    }
-                        }
-                                      <p class="media-comment">
-                                          <--Place Holder for PDCA-->
-                                      </p>
-                                      @if (String.Equals(idea.CreatedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
-                                {
-                                  <button class="btn btn-success btn-circle text-uppercase" style="display:block" id="@("editButton"+@idea.IdeaId)" onclick=""><span class="glyphicon glyphicon-send"></span>Click To Edit</button>
-                        }
-                                  </h4>
+                                  <div class="well well-lg">
+                                      <h4 class="media-heading text-uppercase reviews"> @idea.CreatedBy </h4>
+                                      <ul class="media-date text-uppercase reviews">
+                                          @idea.CreatedDate @idea.PDCA.ToString()
 
-                              </div>
+                                      </ul>
+                                      <p class="media-comment">
+                                          @idea.IdeaContent
+                                      </p>
+                                      <h4 class="media-comment">
+                                          @foreach (var user in Model.Users) // Use Order By to List by Top Idea Once Upvotes work
+        {
+                                  @if (String.Equals(idea.CreatedBy, user.UserName, StringComparison.OrdinalIgnoreCase))
+{
+                                  @foreach (var divs in Model.Divisions)
+{
+                                  @if (divs.DivisionId == user.UserDivisionDivisionId)
+{
+                                  @divs.DivisionName
+}
+}
+                                  @foreach (var units in Model.Units)
+{
+                                  @if (units.UnitId == user.UserUnitUnitId)
+{
+                                  @units.UnitName
+}
+}
+}
+}
+                                          <p class="media-comment">
+                                              <--Place Holder for PDCA-->
+                                          </p>
+                                          @if (String.Equals(idea.CreatedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
+        {
+                                  <button class="btn btn-success btn-circle text-uppercase" style="display:block" id="@("editButton"+@idea.IdeaId)" onclick=""><span class="glyphicon glyphicon-send"></span>Click To Edit</button>
+}
+                                      </h4>
+
+                                  </div>
                               <button class="btn btn-success btn-circle text-uppercase" style="display:block" id="@("commentButton"+@idea.IdeaId)" onclick="@("displayCommentForm("+@idea.IdeaId))"><span class="glyphicon glyphicon-send"></span>Click To Comment</button>
                               <div style="display:none" id="@("commentForm"+@idea.IdeaId)">
                                   <div class="tab-pane" id="add-comment2">

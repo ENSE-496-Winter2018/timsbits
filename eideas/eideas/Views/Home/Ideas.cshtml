@@ -26,7 +26,6 @@
           <div class="comment-tabs">
               <ul class="nav nav-tabs" role="tablist">
                   <li class="active"><a href="#comments-logout" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">View Ideas</h4></a></li>
-                  <li><a href="#add-comment" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">New Idea</h4></a></li>
               </ul>
               <div class="tab-content">
                   <div class="tab-pane active" id="comments-logout">
@@ -39,15 +38,10 @@
                                 // cut for brevity, need to add back more code from original
                                   <div class="well well-lg">
                                       <h4 class="media-heading text-uppercase reviews"> @idea.CreatedBy </h4>
-                                      <ul class="media-date text-uppercase reviews">
-                                          @idea.CreatedDate @idea.PDCA.ToString()
-
-                                      </ul>
-                                      <p class="media-comment">
-                                          @idea.IdeaContent
-                                      </p>
-                                      <h4 class="media-comment">
-                                          @foreach (var user in Model.Users) // Use Order By to List by Top Idea Once Upvotes work
+                                          @idea.CreatedDate 
+                                          <p></p>
+                                      
+                                      @foreach (var user in Model.Users) // Use Order By to List by Top Idea Once Upvotes work
         {
                                   @if (String.Equals(idea.CreatedBy, user.UserName, StringComparison.OrdinalIgnoreCase))
 {
@@ -56,6 +50,7 @@
                                   @if (divs.DivisionId == user.UserDivisionDivisionId)
 {
                                   @divs.DivisionName
+                                  <p></p>
 }
 }
                                   @foreach (var units in Model.Units)
@@ -63,13 +58,22 @@
                                   @if (units.UnitId == user.UserUnitUnitId)
 {
                                   @units.UnitName
+                                  <hr>
 }
 }
 }
 }
-                                          <p class="media-comment">
-                                              <--Place Holder for PDCA-->
-                                          </p>
+                                      
+                                      <p style="font-weight:bold;text-transform:uppercase;">
+                                          @idea.PDCA.ToString()
+                                      </p>
+                                      <p class="media-comment">
+                                          <h3>Idea:</h3>
+                                          @idea.IdeaContent
+                                      </p>
+                                      <h4 class="media-comment">
+                                          
+                                    
                                           @if (String.Equals(idea.CreatedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
         {
                                   <button class="btn btn-success btn-circle text-uppercase" style="display:block" id="@("editButton"+@idea.IdeaId)" onclick=""><span class="glyphicon glyphicon-send"></span>Click To Edit</button>

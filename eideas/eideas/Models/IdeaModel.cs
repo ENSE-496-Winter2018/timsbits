@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using eideas.Areas.Identity.Data;
 using eideas.Data;
-using eideas.Areas.Identity.Data;
+
 using Microsoft.AspNetCore.Identity;
 
 namespace eideas.Models

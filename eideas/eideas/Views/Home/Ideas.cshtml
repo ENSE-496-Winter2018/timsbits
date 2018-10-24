@@ -6,105 +6,108 @@
 <body>
 <div class="container">
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" id="logout">
-        <div class="page-header">
-            <h3 class="reviews">Ideas</h3>
-        </div>
-        <div class="comment-tabs">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#comments-logout" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">View Ideas</h4></a></li>
-                <li><a href="#add-comment" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">New Idea</h4></a></li>
-            </ul>            
-            <div class="tab-content">
-                <div class="tab-pane active" id="comments-logout">                
-                    <ul class="media-list">
-                        <li class="media">
-                            <div class="media-body"> <!--.OrderBy(i => i.IdeaUpdoots.Count) -->
-                                @foreach (var idea in Model.Ideas) 
+      <div class="col-sm-10 col-sm-offset-1" id="logout">
+          <div class="page-header">
+              <h3 class="reviews">Ideas</h3>
+          </div>
+          <form action="" method="post" class="form-horizontal" id="commentForm" role="form">
+              <div class="form-group">
+                  <label asp-for="NewIdea.IdeaContent" class="col-sm-2 control-label">Idea</label>
+                  <div class="col-sm-10">
+                      <textarea asp-for="NewIdea.IdeaContent" class="form-control" rows="5"></textarea>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                      <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Submit Idea</button>
+                  </div>
+              </div>
+          </form>
+          <div class="comment-tabs">
+              <ul class="nav nav-tabs" role="tablist">
+                  <li class="active"><a href="#comments-logout" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">View Ideas</h4></a></li>
+                  <li><a href="#add-comment" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">New Idea</h4></a></li>
+              </ul>
+              <div class="tab-content">
+                  <div class="tab-pane active" id="comments-logout">
+                      <ul class="media-list">
+                          <li class="media">
+                              <div class="media-body">
+                                  <!--.OrderBy(i => i.IdeaUpdoots.Count) -->
+                                  @foreach (var idea in Model.Ideas)
+                            {
+                                // cut for brevity, need to add back more code from original
+                              <div class="well well-lg">
+                                  <h4 class="media-heading text-uppercase reviews"> @idea.CreatedBy </h4>
+                                  <ul class="media-date text-uppercase reviews">
+                                      @idea.CreatedDate
+                                  </ul>
+                                  <p class="media-comment">
+                                      @idea.IdeaContent
+                                  </p>
+                                  <h4 class="media-comment">
+                                      @foreach (var user in Model.Users) // Use Order By to List by Top Idea Once Upvotes work
                                 {
-                                    // cut for brevity, need to add back more code from original
-                                    <div class="well well-lg">
-                                        <h4 class="media-heading text-uppercase reviews"> @idea.CreatedBy </h4>
-                                        <ul class="media-date text-uppercase reviews">
-                                            @idea.CreatedDate
-                                        </ul>
-                                        <p class="media-comment">
-                                            @idea.IdeaContent
-                                        </p>
-                                        <h4 class="media-comment">
-                                            @foreach (var user in Model.Users) // Use Order By to List by Top Idea Once Upvotes work
-                                            {
-                                                @if (String.Equals(idea.CreatedBy, user.UserName, StringComparison.OrdinalIgnoreCase))
-                                                {
-                                                    @foreach (var divs in Model.Divisions)
-                                                    {
-                                                        @if(divs.DivisionId == user.UserDivisionDivisionId)
-                                                        {
-                                                            @divs.DivisionName
-                                                        }
-                                                    }
-                                                     @foreach (var units in Model.Units)
-                                                    {
-                                                        @if(units.UnitId == user.UserUnitUnitId)
-                                                        {
-                                                            @units.UnitName
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            <p class="media-comment">
-                                            <--Place Holder for PDCA-->
-                                            </p>
-                                            @if (String.Equals(idea.CreatedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
-                                            {
-                                                <button class="btn btn-success btn-circle text-uppercase" style="display:block" id="@("editButton"+@idea.IdeaId)" onclick=""><span class="glyphicon glyphicon-send"></span>Click To Edit</button>
-                                            }
-                                        </h4>
-                                        
-                                    </div>
-                                    <button class="btn btn-success btn-circle text-uppercase" style="display:block" id="@("commentButton"+@idea.IdeaId)" onclick="@("displayCommentForm("+@idea.IdeaId))"><span class="glyphicon glyphicon-send"></span>Click To Comment</button>
-                                    <div style="display:none" id="@("commentForm"+@idea.IdeaId)">
-                                          <div class="tab-pane" id="add-comment2">
-                                            <form action="/AddComment" method="post" class="form-horizontal" id="commentForm" role="form"> 
-                                            <div class="form-group">
-    <--Gotta Change these -->                    <label asp-for="NewComment.Comment" class="col-sm-2 control-label">Comment</label>
-                                                 <div class="col-sm-10">
-                                                    <textarea asp-for="NewComment.Comment" name="commentdata" class="form-control" rows="5"></textarea>
-                                                    <textarea asp-for="NewComment.IdeaId"></textarea>
-                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">                    
-                                                    <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment2"><span class="glyphicon glyphicon-send"></span> Submit Comment</button>
-                                                </div>
-                                            </div>            
-                                        </form>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                      </li>
-                    </ul> 
-                </div>
+                                  @if (String.Equals(idea.CreatedBy, user.UserName, StringComparison.OrdinalIgnoreCase))
+                            {
+                              @foreach (var divs in Model.Divisions)
+                        {
+                          @if (divs.DivisionId == user.UserDivisionDivisionId)
+                    {
+                      @divs.DivisionName
+            }
+                }
+                              @foreach (var units in Model.Units)
+                        {
+                          @if (units.UnitId == user.UserUnitUnitId)
+                    {
+                      @units.UnitName
+            }
+                }
+                    }
+                        }
+                                      <p class="media-comment">
+                                          <--Place Holder for PDCA-->
+                                      </p>
+                                      @if (String.Equals(idea.CreatedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
+                                {
+                                  <button class="btn btn-success btn-circle text-uppercase" style="display:block" id="@("editButton"+@idea.IdeaId)" onclick=""><span class="glyphicon glyphicon-send"></span>Click To Edit</button>
+                        }
+                                  </h4>
 
-                <div class="tab-pane" id="add-comment3">
-                    <form action="" method="post" class="form-horizontal" id="commentForm" role="form"> 
-                        <div class="form-group">
-                            <label asp-for="NewIdea.IdeaContent" class="col-sm-2 control-label">Idea</label>
-                            <div class="col-sm-10">
-                                <textarea asp-for="NewIdea.IdeaContent" class="form-control" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">                    
-                                <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Submit Idea</button>
-                            </div>
-                        </div>            
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                              </div>
+                              <button class="btn btn-success btn-circle text-uppercase" style="display:block" id="@("commentButton"+@idea.IdeaId)" onclick="@("displayCommentForm("+@idea.IdeaId))"><span class="glyphicon glyphicon-send"></span>Click To Comment</button>
+                              <div style="display:none" id="@("commentForm"+@idea.IdeaId)">
+                                  <div class="tab-pane" id="add-comment2">
+                                      <form action="/AddComment" method="post" class="form-horizontal" id="commentForm" role="form">
+                                          <div class="form-group">
+                                              <--Gotta Change these -->
+                                                  <label asp-for="NewComment.Comment" class="col-sm-2 control-label">Comment</label>
+                                                  <div class="col-sm-10">
+                                                      <textarea asp-for="NewComment.Comment" name="commentdata" class="form-control" rows="5"></textarea>
+                                                      <textarea asp-for="NewComment.IdeaId"></textarea>
+                                                  </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <div class="col-sm-offset-2 col-sm-10">
+                                                  <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment2"><span class="glyphicon glyphicon-send"></span> Submit Comment</button>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                    }
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+
+                  <div class="tab-pane" id="add-comment3">
+
+                  </div>
+              </div>
+          </div>
+      </div>
 </div>
 
 

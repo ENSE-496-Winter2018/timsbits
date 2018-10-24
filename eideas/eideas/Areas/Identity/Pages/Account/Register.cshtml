@@ -59,12 +59,12 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            @*<select id="division" class="form-control" name="division">
-                                <option value="" selected disabled hidden>Select your divison</option>
-                                <option value="finance">Finance</option>
-                                <option value="other">Other</option>
-                            </select>*@
-                            <select id="division" class="form-control" asp-items="@Model.LstDivisions" name="division"></select>
+                            <select id"="division" class="form-control" asp-for="Input.DivisionId">
+                                @foreach (var division in Model.DivisionUnitMap.Keys)
+                                {
+                                    <option value="@division.DivisionId.ToString()">@division.DivisionName</option>
+                                }
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -74,10 +74,12 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user-circle-o fa" aria-hidden="true"></i></span>
-                            <select id="unit" class="form-control" name="unit">
-                                <option value="" selected disabled hidden>Select your unit</option>
-                                <option value="payroll">Payroll</option>
-                                <option value="other">Other</option>
+                            <select asp-for="Input.UnitId" class="form-control" id="unit">
+                                @foreach (var division in Model.DivisionUnitMap) {
+                                    @foreach (var unit in division.Value) {    
+                                        <option class="unit-option" data-division="@division.Key.DivisionId" value="@unit.UnitId.ToString()">@unit.UnitName</option>
+                                    }
+                                }
                             </select>
                         </div>
                     </div>

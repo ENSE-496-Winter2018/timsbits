@@ -25,9 +25,6 @@ namespace eideas.Data
         public DbSet<CommentUpDoot> CommentUpDoots { get; set; }
         public DbSet<IdeaSubscription> IdeaSubscriptions { get; set; }
 
-
-
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -42,7 +39,7 @@ namespace eideas.Data
 
 
             //IdeaSubscription mapping
-            builder.Entity<IdeaSubscription>().HasKey(a => new { a.Id,a.IdeaId });
+            builder.Entity<IdeaSubscription>().HasKey(a => new { a.Id, a.IdeaId });
 
             builder.Entity<IdeaSubscription>().HasOne(a => a.EideasUser)
                 .WithMany(b => b.IdeaSubscriptions).HasForeignKey(c => c.Id);
@@ -74,10 +71,18 @@ namespace eideas.Data
 
             builder.Entity<Division>().HasMany(a => a.Units).WithOne(b => b.Division).HasForeignKey(c => c.DivisionId);
 
+            builder.Entity<Division>().HasData(
+                new Division { DivisionId = 1, DivisionName = "Finance" },
+                new Division { DivisionId = 2, DivisionName = "Marketing" },
+                new Division { DivisionId = 3, DivisionName = "Content" }
+            );
 
+            builder.Entity<Unit>().HasData(
+                new Unit { UnitId = 1, UnitName = "Payroll", DivisionId = 1 },
+                new Unit { UnitId = 2, UnitName = "Economics", DivisionId = 1 },
+                new Unit { UnitId = 3, UnitName = "Poster Makers", DivisionId = 2 },
+                new Unit { UnitId = 4, UnitName = "Coders", DivisionId = 3 }
+            );
         }
-
-
-       
     }
 }

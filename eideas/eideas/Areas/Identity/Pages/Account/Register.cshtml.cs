@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using eideas.Areas.Identity.Data;
@@ -10,7 +11,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 
 namespace eideas.Areas.Identity.Pages.Account
@@ -24,13 +24,14 @@ namespace eideas.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext db;
 
+        public Dictionary<Division, List<Unit>> DivisionUnitMap = new Dictionary<Division, List<Unit>>();
 
         public RegisterModel(
             UserManager<EIdeasUser> userManager,
             SignInManager<EIdeasUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            ApplicationDbContext context
+            ApplicationDbContext context    
             )
         {
             _userManager = userManager;
@@ -39,22 +40,17 @@ namespace eideas.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             db = context;
 
-            LstDivisions = new List<SelectListItem>();
+            var divisions = db.Divisions.ToList();
 
-            if (db.Divisions != null)
+            divisions.ForEach(d =>
             {
-                foreach (var division in db.Divisions)
-                {
-                    SelectListItem i = new SelectListItem();
-                    i.Value = division.DivisionId.ToString();
-                    i.Text = division.DivisionName;
-                    LstDivisions.Add(i);
-                }
-            }
+                var units = db.Units
+                                    .Where(unit => unit.DivisionId == d.DivisionId)
+                                    .ToList();
 
+                DivisionUnitMap.Add(d, units);
+            });
         }
-
-        public List<SelectListItem> LstDivisions { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -79,7 +75,13 @@ namespace eideas.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            public SelectListItem selectedDivision { get; set; }
+            [Required]
+            [Display(Name = "Division")]
+            public int DivisionId { get; set; }
+
+            [Required]
+            [Display(Name = "Unit")]
+            public int UnitId { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -87,17 +89,21 @@ namespace eideas.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
-
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-            //    var division = new Division (4, "Finance", "20120618 10:34:09 AM", null);
-              //  var unit = new Unit (5, "Payroll", "20120618 10:34:09 AM", 4, null);
-                var user = new EIdeasUser { UserName = Input.Email, Email = Input.Email, UserDivisionDivisionId = 4, UserUnitUnitId = 5};
+                var user = new EIdeasUser { 
+                    UserName = Input.Email, 
+                    Email = Input.Email, 
+                    UserDivisionDivisionId = Input.DivisionId, 
+                    UserUnitUnitId = Input.UnitId, 
+                    SecurityStamp = new Random().Next(100000).ToString()
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                {
+                if (result.Succeeded) {
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -113,8 +119,8 @@ namespace eideas.Areas.Identity.Pages.Account
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
-                foreach (var error in result.Errors)
-                {
+
+                foreach (var error in result.Errors) {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }

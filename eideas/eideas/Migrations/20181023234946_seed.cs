@@ -12,8 +12,9 @@ namespace eideas.Migrations
                 columns: new[] { "DivisionId", "CreatedDate", "DivisionName" },
                 values: new object[,]
                 {
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Marketing" },
-                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Content" }
+                    { 1,DateTime.Now, "Finance" },
+                    { 2, DateTime.Now, "Marketing" },
+                    { 3, DateTime.Now, "Content" }
                 });
 
             migrationBuilder.InsertData(
@@ -21,19 +22,20 @@ namespace eideas.Migrations
                 columns: new[] { "UnitId", "CreatedDate", "DivisionId", "UnitName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Payroll" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Economics" }
+
+                    { 1,  DateTime.Now, 1, "Payroll" },
+                    { 2, DateTime.Now, 1, "Economics" },                    
                 });
 
             migrationBuilder.InsertData(
                 table: "Units",
                 columns: new[] { "UnitId", "CreatedDate", "DivisionId", "UnitName" },
-                values: new object[] { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Poster Makers" });
+                values: new object[] { 3, DateTime.Now, 2, "Poster Makers" });
 
             migrationBuilder.InsertData(
                 table: "Units",
                 columns: new[] { "UnitId", "CreatedDate", "DivisionId", "UnitName" },
-                values: new object[] { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Coders" });
+                values: new object[] { 4, DateTime.Now, 3, "Coders" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

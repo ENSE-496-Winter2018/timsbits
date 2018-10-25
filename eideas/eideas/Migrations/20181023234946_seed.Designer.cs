@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eideas.Data;
 
 namespace eideas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181023234946_seed")]
+    partial class seed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,8 +67,6 @@ namespace eideas.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<int?>("DivisionId");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -96,18 +96,14 @@ namespace eideas.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<int?>("UnitId");
-
-                    b.Property<int>("UserDivisionDivisionId");
+                    b.Property<int?>("UserDivisionDivisionId");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
-                    b.Property<int>("UserUnitUnitId");
+                    b.Property<int?>("UserUnitUnitId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DivisionId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -118,8 +114,6 @@ namespace eideas.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.HasIndex("TeamId");
-
-                    b.HasIndex("UnitId");
 
                     b.HasIndex("UserDivisionDivisionId");
 
@@ -145,8 +139,6 @@ namespace eideas.Migrations
                     b.Property<string>("IdeaName");
 
                     b.Property<bool>("IsActive");
-
-                    b.Property<int>("PDCA");
 
                     b.Property<string>("UpdatedBy");
 
@@ -386,27 +378,17 @@ namespace eideas.Migrations
 
             modelBuilder.Entity("eideas.Areas.Identity.Data.EIdeasUser", b =>
                 {
-                    b.HasOne("eideas.Areas.Identity.Data.Division")
-                        .WithMany("EideasUsers")
-                        .HasForeignKey("DivisionId");
-
                     b.HasOne("eideas.Areas.Identity.Data.Team", "Team")
                         .WithMany("EideasUsers")
                         .HasForeignKey("TeamId");
 
-                    b.HasOne("eideas.Areas.Identity.Data.Unit")
-                        .WithMany("EideasUsers")
-                        .HasForeignKey("UnitId");
-
                     b.HasOne("eideas.Areas.Identity.Data.Division", "UserDivision")
-                        .WithMany()
-                        .HasForeignKey("UserDivisionDivisionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .WithMany("EideasUsers")
+                        .HasForeignKey("UserDivisionDivisionId");
 
                     b.HasOne("eideas.Areas.Identity.Data.Unit", "UserUnit")
-                        .WithMany()
-                        .HasForeignKey("UserUnitUnitId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .WithMany("EideasUsers")
+                        .HasForeignKey("UserUnitUnitId");
                 });
 
             modelBuilder.Entity("eideas.Areas.Identity.Data.Idea", b =>

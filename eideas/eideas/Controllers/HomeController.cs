@@ -43,12 +43,9 @@ namespace eideas.Controllers
 
         public IActionResult Ideas()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Your Ideas page.";
 
-            ICollection<Idea> ideas = new List<Idea>();
-
-            if (db.Ideas != null)
-                ideas = db.Ideas.ToList();
+            ICollection<Idea> ideas = db.Ideas.ToList();
             
             ICollection<EIdeasUser> users = new List<EIdeasUser>();
 
@@ -75,6 +72,7 @@ namespace eideas.Controllers
                 NewComment = new IdeaComment()
             });
         }
+
         [HttpPost]
         [Route("AddComment")]
         public ActionResult Commented(IdeaComment NewComment)

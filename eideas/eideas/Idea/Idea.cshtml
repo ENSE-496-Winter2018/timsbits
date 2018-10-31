@@ -7,19 +7,19 @@
 }
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <h1>Idea #@Model.IdeaId</h1>
+        <h3>Idea #@Model.IdeaId</h3>
 
     @{var voted = Model.IdeaUpdoots.Any(i => i.Id == UserManager.GetUserId(User));}
     <div class="row">
-        <div class="col-xs-4 text-center" style="width:160px;">
+        <div class="col-sm-3 text-center" style="width:160px;">
             <div class="text-center pull-left" style="margin-top:15px;">
                 <i class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onmousedown="upvote(@Model.IdeaId)"></i><br />
                 <span id="upvoteCount-@Model.IdeaId">@Model.IdeaUpdoots.Count</span>
             </div>
             <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="/images/headshot.png" alt="Profile Picture" />
         </div>
-        <div class="col-xs-8">
-            <h3>@Model.IdeaName</h3>
+        <div class="col-sm-9 col-xs-12">
+            <h3>@Model.IdeaName&nbsp;</h3>
             <p>@Model.IdeaContent</p>
         </div>
     </div>
@@ -39,12 +39,32 @@
             </div>
         </div>
     </div>
-    <div class="row" style="margin-top: 15px;">
-        <div class="col-xs-12">
-            <h5>Add a comment</h5>
-            <textarea type="text" class="form-control" id="NewComment" name="NewComment" placeholder="Leave useful feedback or additional information"></textarea>
-        </div>
-    </div>
 
+    @Html.Partial("~/Idea/_CommentForm.cshtml", new IdeaComment())
+
+
+     <div class="row">
+         <div class="col-xs-12">
+             <h3>Comments</h3>
+             @foreach (var comment in Model.IdeaComments)
+             {
+             <div class="row" style="margin-top:15px;">
+                 <div class="col-xs-4 text-center" style="width:140px;">
+                     <div class="text-center pull-left">
+                         <i class="glyphicon glyphicon-chevron-up upvote" onmousedown="upvote(@Model.IdeaId)"></i><br />
+                         <span id="">123</span>
+                     </div>
+                     <img class="pull-left" style="border-radius:50%; height: 60px; width: 60px; object-fit: cover; margin-left: 15px;" src="/images/headshot.png" alt="Profile Picture" />
+                 </div>
+                 <div class="col-xs-8">
+                     <h4>@comment.Comment &nbsp;</h4>
+                     <p class="small">@comment.EIdeasUser.Email at @comment.CreatedDate.ToString("hh:mmtt - MM/dd/yyyy")</p>
+                      <hr/>
+                 </div>
+
+             </div>
+             }
+         </div>
+    </div>
     </div>
 </div>

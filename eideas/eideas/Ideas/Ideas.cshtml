@@ -12,22 +12,28 @@
         @foreach (var idea in Model)
         {
             var voted = idea.IdeaUpdoots.Any(i => i.Id == UserManager.GetUserId(User));
-            <div class="idea panel panel-default" onmousedown="viewIdea(@idea.IdeaId)">
+            <div class="idea panel panel-default" onclick="viewIdea(@idea.IdeaId)">
                 <div class="panel-body">
-                    <div class="text-center" style="width:160px;">
-                        <div class="text-center pull-left" style="margin-top:15px;">
-                            <i id="vote-icon-@idea.IdeaId" class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onmousedown="upvote(@idea.IdeaId)"></i><br />
-                            <span id="upvoteCount-@idea.IdeaId">@idea.IdeaUpdoots.Count</span>
+                    <div class="row">
+                        <div class="text-center col-sm-3" style="width:160px;">
+                            <div class="text-center pull-left" style="margin-top:15px;">
+                                <i id="vote-icon-@idea.IdeaId" class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onclick="upvote(@idea.IdeaId)"></i><br />
+                                <span id="upvoteCount-@idea.IdeaId">@idea.IdeaUpdoots.Count</span>
+                            </div>
+                            <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="images/headshot.png" alt="Profile Picture" />
                         </div>
-                        <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="images/headshot.png" alt="Profile Picture" />
-                    </div>
-                    <div style="margin-left: 15px; float: left;">
-                        <h3>@idea.IdeaContent</h3>
-                        <p>Submitted by @idea.CreatedBy</p>
-                        <p>@idea.CreatedDate</p>
+                        <div class="col-xs-11 col-sm-9" style="margin-left: 15px; float: left;">
+                            <h3>@idea.IdeaName&nbsp;</h3>
+                            <p>@idea.IdeaContent</p>
+                            <p class="small">
+                                Submitted by @idea.CreatedBy<br/>
+                                @idea.CreatedDate.ToString("hh:mmtt - MM/dd/yyyy")
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="col-md-6 col-md-offset-6 col-xs-8 col-xs-offset-4" style="margin-top: -25px;">
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12">
                         <div class="col-xs-3 pdca text-center @(idea.PDCA == PDCA.plan ? "doing" : "") @(idea.PDCA > PDCA.plan ? "done" : "")">
                             Plan
                         </div>

@@ -37,6 +37,7 @@ namespace eideas.Areas.Identity.Data
 
         public Idea() {
             IdeaUpdoots = new HashSet<IdeaUpDoot>();
+            IdeaComments = new HashSet<IdeaComment>();
         }
     }
 }

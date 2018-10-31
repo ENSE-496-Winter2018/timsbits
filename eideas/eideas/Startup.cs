@@ -31,7 +31,6 @@ namespace eideas
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -58,16 +57,8 @@ namespace eideas
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    "Idea", // Name
-                    "Idea/{ideaId}", // Url
-                    new { controller = "Idea", action = "Index", ideaId = -1 } // Default params
-                );
-
-                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-
-
             });
         }
     }

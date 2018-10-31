@@ -21,7 +21,6 @@ namespace eideas.NewFolder
             userManager = _userManager;
         }
 
-        [Authorize]
         public IActionResult Index()
         {
             ICollection<Idea> ideas = db.Ideas.Include(i => i.IdeaUpdoots).ToList();

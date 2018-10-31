@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using eideas.Areas.Identity.Data
+@inject UserManager<EIdeasUser> UserManager
+@model ICollection<Idea>
+@{
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h1>Latest Ideas</h1>
+        @foreach (var idea in Model)
+        {
+            var voted = idea.IdeaUpdoots.Any(i => i.Id == UserManager.GetUserId(User));
+            <div class="idea panel panel-default" onmousedown="viewIdea(@idea.IdeaId)">
+                <div class="panel-body">
+                    <div class="text-center" style="width:160px;">
+                        <div class="text-center pull-left" style="margin-top:15px;">
+                            <i id="vote-icon-@idea.IdeaId" class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onmousedown="upvote(@idea.IdeaId)"></i><br />
+                            <span id="upvoteCount-@idea.IdeaId">@idea.IdeaUpdoots.Count</span>
+                        </div>
+                        <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="images/headshot.png" alt="Profile Picture" />
+                    </div>
+                    <div style="margin-left: 15px; float: left;">
+                        <h3>@idea.IdeaContent</h3>
+                        <p>Submitted by @idea.CreatedBy</p>
+                        <p>@idea.CreatedDate</p>
+                    </div>
+
+                    <div class="col-md-6 col-md-offset-6 col-xs-8 col-xs-offset-4" style="margin-top: -25px;">
+                        <div class="col-xs-3 pdca text-center @(idea.PDCA == PDCA.plan ? "doing" : "") @(idea.PDCA > PDCA.plan ? "done" : "")">
+                            Plan
+                        </div>
+                        <div class="col-xs-3 pdca text-center @(idea.PDCA == PDCA.@do ? "doing" : "") @(idea.PDCA > PDCA.@do ? "done" : "")">
+                            Do
+                        </div>
+                        <div class="col-xs-3 pdca text-center @(idea.PDCA == PDCA.check ? "doing" : "") @(idea.PDCA > PDCA.check ? "done" : "")">
+                            Check
+                        </div>
+                        <div class="col-xs-3 pdca text-center @(idea.PDCA == PDCA.act ? "doing" : "") @(idea.PDCA > PDCA.act ? "done" : "")">
+                            Act
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function upvote(ideaId) {
+        console.log(event)
+        event.stopPropagation()
+        event.preventDefault()
+        fetch('@Url.Action("Upvote")', {
+        method: 'POST',
+        headers: { "Content-type": "application/json" },
+        body: ideaId //JSON.stringify({IdeaId: ideaId})
+        })
+        .then(res => {
+            if (res.status === 200) {
+                const ele = document.getElementById(`upvoteCount-${ideaId}`)
+                const count = ele.innerHTML
+                ele.innerHTML = +count + 1;
+                const vicon = document.getElementById(`vote-icon-${ideaId}`);
+                vicon.classList.add("voted");               
+            }
+        })
+    }
+
+    function viewIdea(ideaId) {
+        window.location.href = `/Idea/${ideaId}`
+    }
+</script>

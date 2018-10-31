@@ -1,0 +1,17 @@
+﻿@model eideas.Models.ErrorViewModel
+
+ @{
+     ViewData["Title"] = "Error";
+ }
+<body>
+	<video autoplay muted loop id="myVideo">
+  <source src="~/images/Pressure/Hill.mp4" type="video/mp4">
+</video>
+<div class="login-container">
+    <div class=login-page-header>
+        <p class="welcome">Welcome</p> 
+        <p class ="to-ideas">to eIdeas </p>
+        <span class="blinking-cursor">|Error @Html.DisplayFor(Model => Model.RequestId) Though</span>    
+    </div>
+</div>
+</body>

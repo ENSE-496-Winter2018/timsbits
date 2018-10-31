@@ -16,7 +16,7 @@
                 <div class="panel-body">
                     <div class="text-center" style="width:160px;">
                         <div class="text-center pull-left" style="margin-top:15px;">
-                            <i class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onmousedown="upvote(@idea.IdeaId)"></i><br />
+                            <i id="vote-icon-@idea.IdeaId" class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onmousedown="upvote(@idea.IdeaId)"></i><br />
                             <span id="upvoteCount-@idea.IdeaId">@idea.IdeaUpdoots.Count</span>
                         </div>
                         <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="images/headshot.png" alt="Profile Picture" />
@@ -24,6 +24,7 @@
                     <div style="margin-left: 15px; float: left;">
                         <h3>@idea.IdeaContent</h3>
                         <p>Submitted by @idea.CreatedBy</p>
+                        <p>@idea.CreatedDate</p>
                     </div>
 
                     <div class="col-md-6 col-md-offset-6 col-xs-8 col-xs-offset-4" style="margin-top: -25px;">
@@ -60,7 +61,9 @@
             if (res.status === 200) {
                 const ele = document.getElementById(`upvoteCount-${ideaId}`)
                 const count = ele.innerHTML
-                ele.innerHTML = +count + 1; 
+                ele.innerHTML = +count + 1;
+                const vicon = document.getElementById(`vote-icon-${ideaId}`);
+                vicon.classList.add("voted");               
             }
         })
     }

@@ -1,4 +1,6 @@
-﻿@using eideas.Areas.Identity.Data
+﻿@using Microsoft.AspNetCore.Identity
+@using eideas.Areas.Identity.Data
+@inject UserManager<EIdeasUser> UserManager
 @model ICollection<Idea>
 @{
     Layout = "_Layout";
@@ -9,11 +11,12 @@
         <h1>Latest Ideas</h1>
         @foreach (var idea in Model)
         {
-            <div class="panel panel-default">
+            var voted = idea.IdeaUpdoots.Any(i => i.Id == UserManager.GetUserId(User));
+            <div class="idea panel panel-default" onmousedown="viewIdea(@idea.IdeaId)">
                 <div class="panel-body">
                     <div class="text-center" style="width:160px;">
                         <div class="text-center pull-left" style="margin-top:15px;">
-                            <i class="glyphicon glyphicon-chevron-up upvote" onmousedown="upvote(@idea.IdeaId)"></i><br />
+                            <i class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onmousedown="upvote(@idea.IdeaId)"></i><br />
                             <span id="upvoteCount-@idea.IdeaId">@idea.IdeaUpdoots.Count</span>
                         </div>
                         <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="images/headshot.png" alt="Profile Picture" />
@@ -45,52 +48,24 @@
 
 <script>
     function upvote(ideaId) {
+        console.log(event)
+        event.stopPropagation()
+        event.preventDefault()
         fetch('@Url.Action("Upvote")', {
         method: 'POST',
         headers: { "Content-type": "application/json" },
         body: ideaId //JSON.stringify({IdeaId: ideaId})
         })
-        .then(() => {
-            const ele = document.getElementById(`upvoteCount-${ideaId}`)
-            console.log(ele)
-            const count = ele.innerHTML
-            ele.innerHTML = +count + 1; 
+        .then(res => {
+            if (res.status === 200) {
+                const ele = document.getElementById(`upvoteCount-${ideaId}`)
+                const count = ele.innerHTML
+                ele.innerHTML = +count + 1; 
+            }
         })
     }
+
+    function viewIdea(ideaId) {
+        window.location.href = `/Idea/${ideaId}`
+    }
 </script>
-
-<style>
-    .pdca {
-        color: rgba(0,0,0,0.6);
-        background-color: rgba(0,0,0,0.1);
-    }
-
-    .pdca.doing {
-        background-color: lightgoldenrodyellow;
-    }
-
-    .pdca.done {
-        background-color: lightgreen;
-    }
-
-    .panel {
-        transition: all 0.3s ease;
-    }
-
-    .panel:hover {
-        box-shadow: 0 2px 1px rgba(0,0,0,0.16), 0 1px 2px rgba(0,0,0,0.23);
-        cursor: pointer;
-    }
-
-    .upvote {
-        font-size: 24pt;
-    }
-
-    .upvote.voted {
-        color: rgb(39, 128, 227);
-    }
-
-    .upvote:hover {
-        color: rgb(39, 128, 227);
-    }
-</style>

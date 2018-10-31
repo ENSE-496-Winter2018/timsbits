@@ -1,4 +1,6 @@
-﻿@using eideas.Areas.Identity.Data
+﻿@using Microsoft.AspNetCore.Identity
+@using eideas.Areas.Identity.Data
+@inject UserManager<EIdeasUser> UserManager
 @model Idea
 @{
     Layout = "_Layout";
@@ -6,5 +8,43 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <h1>Idea #@Model.IdeaId</h1>
+
+    @{var voted = Model.IdeaUpdoots.Any(i => i.Id == UserManager.GetUserId(User));}
+    <div class="row">
+        <div class="col-xs-4 text-center" style="width:160px;">
+            <div class="text-center pull-left" style="margin-top:15px;">
+                <i class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onmousedown="upvote(@Model.IdeaId)"></i><br />
+                <span id="upvoteCount-@Model.IdeaId">@Model.IdeaUpdoots.Count</span>
+            </div>
+            <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="/images/headshot.png" alt="Profile Picture" />
+        </div>
+        <div class="col-xs-8">
+            <h3>@Model.IdeaName</h3>
+            <p>@Model.IdeaContent</p>
+        </div>
+    </div>
+    <div class="row" style="margin-top:15px;">
+        <div class="col-xs-12">
+            <div class="col-xs-3 pdca text-center @(Model.PDCA == PDCA.plan ? "doing" : "") @(Model.PDCA > PDCA.plan ? "done" : "")">
+                Plan
+            </div>
+            <div class="col-xs-3 pdca text-center @(Model.PDCA == PDCA.@do ? "doing" : "") @(Model.PDCA > PDCA.@do ? "done" : "")">
+                Do
+            </div>
+            <div class="col-xs-3 pdca text-center @(Model.PDCA == PDCA.check ? "doing" : "") @(Model.PDCA > PDCA.check ? "done" : "")">
+                Check
+            </div>
+            <div class="col-xs-3 pdca text-center @(Model.PDCA == PDCA.act ? "doing" : "") @(Model.PDCA > PDCA.act ? "done" : "")">
+                Act
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-xs-12">
+            <h5>Add a comment</h5>
+            <textarea type="text" class="form-control" id="NewComment" name="NewComment" placeholder="Leave useful feedback or additional information"></textarea>
+        </div>
+    </div>
+
     </div>
 </div>

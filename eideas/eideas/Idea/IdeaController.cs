@@ -4,6 +4,7 @@ using eideas.Areas.Identity.Data;
 using eideas.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eideas.IdeaController
 {
@@ -19,9 +20,15 @@ namespace eideas.IdeaController
         }
 
         public IActionResult Index(int ideaId) {
-            Idea idea = db.Ideas.First(i => i.IdeaId == ideaId);
+            if (ideaId == -1) {
+                return Redirect("/Ideas");
+            }
 
-            return View("~/IdeaDetail/IdeaDetail.cshtml", idea);
+            Idea idea = db.Ideas
+                          .Include(i => i.IdeaUpdoots)
+                          .First(i => i.IdeaId == ideaId);
+
+            return View("~/Idea/Idea.cshtml", idea);
         }
     }
 }

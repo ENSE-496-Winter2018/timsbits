@@ -286,3 +286,40 @@ input::-webkit-input-placeholder {
       color: white;
     }
   }
+
+/* PDCA Styles*/
+.pdca {
+    color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0.1);
+}
+
+.pdca.doing {
+    background-color: lightgoldenrodyellow;
+}
+
+.pdca.done {
+    background-color: lightgreen;
+}
+
+.idea.panel {
+    transition: all 0.3s ease;
+}
+
+.idea.panel:hover {
+    box-shadow: 0 2px 1px rgba(0,0,0,0.16), 0 1px 2px rgba(0,0,0,0.23);
+    background-color: rgba(39, 128, 227, 0.05);
+    cursor: pointer;
+}
+
+.upvote {
+    font-size: 24pt;
+}
+
+.upvote.voted {
+    color: rgb(39, 128, 227);
+}
+
+.upvote:hover {
+    color: rgb(39, 128, 227);
+    cursor: pointer;
+}

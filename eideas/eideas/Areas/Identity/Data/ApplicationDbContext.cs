@@ -35,8 +35,10 @@ namespace eideas.Data
 
             builder.Entity<EIdeasUser>().HasMany(a => a.IdeaComments).WithOne(b => b.EIdeasUser);
 
-            builder.Entity<Idea>().HasMany(a => a.IdeaComments).WithOne(b => b.Idea);
-
+            // Idea
+            builder.Entity<Idea>().HasMany(a => a.IdeaComments).WithOne(b => b.Idea).HasForeignKey(s => s.IdeaId);
+            builder.Entity<Idea>().HasMany(a => a.IdeaUpdoots).WithOne(b => b.Idea).HasForeignKey(s => s.IdeaId);
+            builder.Entity<Idea>().HasMany(a => a.IdeaSubscriptions).WithOne(b => b.Idea).HasForeignKey(s => s.IdeaId);
 
             //IdeaSubscription mapping
             builder.Entity<IdeaSubscription>().HasKey(a => new { a.Id, a.IdeaId });

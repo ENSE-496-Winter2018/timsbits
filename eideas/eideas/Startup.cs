@@ -56,8 +56,8 @@ namespace eideas
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("AddComment", "AddComment",
-                    defaults: new { controller = "HomeController", action = "Ideas" });
+                //routes.MapRoute("AddComment", "AddComment",
+                    //defaults: new { controller = "HomeController", action = "Ideas" });
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

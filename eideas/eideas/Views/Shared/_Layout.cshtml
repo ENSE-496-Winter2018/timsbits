@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     
     
-    <title>@ViewData["Title"] - eideas</title>
+    <title>eHealth eIdeas</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-cosmo.min.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -43,7 +43,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Ideas">Ideas</a></li>
+                    <li><a asp-controller="Ideas" asp-action="">Ideas</a></li>
+                    <li><a asp-controller="NewIdea" asp-action="">New Idea</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

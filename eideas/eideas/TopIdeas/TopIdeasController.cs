@@ -24,9 +24,9 @@ namespace eideas.NewFolder
         [Authorize]
         public IActionResult Index()
         {
-            ICollection<Idea> ideas = db.Ideas.Include(i => i.IdeaUpdoots).ToList();
+            ICollection<Idea> ideas = db.Ideas.Include(i => i.IdeaUpdoots)./*OrderByDescending(i => i.IdeaUpdoots).*/Take(5).ToList();
 
-            return View("~/Ideas/Ideas.cshtml", ideas);
+            return View("~/TopIdeas/TopIdeas.cshtml", ideas);
         }
 
         [Authorize]

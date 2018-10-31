@@ -6,6 +6,7 @@ using eideas.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eideas.NewFolder
 {
@@ -20,6 +21,7 @@ namespace eideas.NewFolder
             userManager = _userManager;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             ICollection<Idea> ideas = db.Ideas.Include(i => i.IdeaUpdoots).ToList();
@@ -27,6 +29,7 @@ namespace eideas.NewFolder
             return View("~/Ideas/Ideas.cshtml", ideas);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Upvote([FromBody] int ideaId) {
             var uid = userManager.GetUserId(HttpContext.User);

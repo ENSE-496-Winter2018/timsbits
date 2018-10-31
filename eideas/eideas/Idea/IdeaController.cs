@@ -5,6 +5,7 @@ using eideas.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eideas.IdeaController
 {
@@ -18,7 +19,7 @@ namespace eideas.IdeaController
             db = context;
             userManager = _userManager;
         }
-
+        [Authorize]
         public IActionResult Index(int ideaId) {
             if (ideaId == -1) {
                 return Redirect("/Ideas");

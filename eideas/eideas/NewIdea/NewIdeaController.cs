@@ -2,6 +2,7 @@
 using eideas.Areas.Identity.Data;
 using eideas.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eideas.Views.NewIdea
 {
@@ -13,12 +14,12 @@ namespace eideas.Views.NewIdea
         {
             db = context;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             return View("~/NewIdea/NewIdea.cshtml");
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult CreateNewIdea(Idea newIdea)
         {

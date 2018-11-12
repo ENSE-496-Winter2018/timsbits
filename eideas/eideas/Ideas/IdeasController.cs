@@ -21,9 +21,27 @@ namespace eideas.NewFolder
             userManager = _userManager;
         }
 
-        public IActionResult Index()
+
+        public IActionResult Index(string filter)
         {
+
             ICollection<Idea> ideas = db.Ideas.Include(i => i.IdeaUpdoots).ToList();
+
+            if (filter != null)
+            {
+                switch (filter)
+                {
+                    case "TopIdeas":
+                        ideas = ideas.OrderByDescending(a => a.IdeaUpdoots.Count()).ToList();
+                        break;
+                    case "LatestIdeas":
+                        ideas = ideas.OrderByDescending(a => a.CreatedDate).ToList();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
 
             return View("~/Ideas/Ideas.cshtml", ideas);
         }

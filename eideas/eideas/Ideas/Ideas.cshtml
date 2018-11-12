@@ -5,10 +5,27 @@
 @{
     Layout = "_Layout";
 }
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
+
         <h1>Latest Ideas</h1>
+
+        <div class="form-group">
+            @*<label for="unit" class="cols-sm-2 control-label">Unit</label>*@
+            <div class="cols-sm-6">
+                <div class="input-group">
+                    <select class="form-control" id="filterIdeasDropDown">
+                        <option class="filter-option" value="TopIdeas">Top Ideas</option>
+                        <option class="filter-option" value="LatestIdeas">Latest Ideas</option>
+                    </select>
+                </div>
+            </div>
+            <a onclick="filterIdeas()" href="#">Filter</a>
+         
+        </div>
+
         @foreach (var idea in Model)
         {
             var voted = idea.IdeaUpdoots.Any(i => i.Id == UserManager.GetUserId(User));
@@ -26,7 +43,7 @@
                             <h3>@idea.IdeaName&nbsp;</h3>
                             <p>@idea.IdeaContent</p>
                             <p class="small">
-                                Submitted by @idea.CreatedBy<br/>
+                                Submitted by @idea.CreatedBy<br />
                                 @idea.CreatedDate.ToString("hh:mmtt - MM/dd/yyyy")
                             </p>
                         </div>
@@ -53,6 +70,9 @@
     </div>
 </div>
 
+        
+
+
 <script>
     function upvote(ideaId) {
         console.log(event)
@@ -69,12 +89,19 @@
                 const count = ele.innerHTML
                 ele.innerHTML = +count + 1;
                 const vicon = document.getElementById(`vote-icon-${ideaId}`);
-                vicon.classList.add("voted");               
+                vicon.classList.add("voted");
             }
         })
     }
 
     function viewIdea(ideaId) {
         window.location.href = `/Idea/${ideaId}`
+    }
+
+    function filterIdeas() {
+        var dd = document.getElementById("filterIdeasDropDown");
+        var selectedVal = dd.options[dd.selectedIndex].value;
+
+        window.location.href = "/Ideas?filter=" + selectedVal;
     }
 </script>

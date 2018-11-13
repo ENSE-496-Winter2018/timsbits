@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace eideas.NewFolder
 {
-    public class TopIdeasController : Controller
+    public class WelcomeController : Controller
     {
         readonly ApplicationDbContext db;
         readonly UserManager<EIdeasUser> userManager;
 
-        public TopIdeasController(ApplicationDbContext context, UserManager<EIdeasUser> _userManager)
+        public WelcomeController(ApplicationDbContext context, UserManager<EIdeasUser> _userManager)
         {
             db = context;
             userManager = _userManager;
@@ -26,7 +26,7 @@ namespace eideas.NewFolder
         {
             ICollection<Idea> ideas = db.Ideas.Include(i => i.IdeaUpdoots)./*OrderByDescending(i => i.IdeaUpdoots).*/Take(5).ToList();
 
-            return View("~/TopIdeas/TopIdeas.cshtml", ideas);
+            return View("~/Welcome/Welcome.cshtml", ideas);
         }
 
         [Authorize]

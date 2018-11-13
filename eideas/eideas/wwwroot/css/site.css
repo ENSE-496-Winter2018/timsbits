@@ -323,3 +323,7 @@ input::-webkit-input-placeholder {
     color: rgb(39, 128, 227);
     cursor: pointer;
 }
+
+#welcome-panel{
+    margin-top: 100px;
+}

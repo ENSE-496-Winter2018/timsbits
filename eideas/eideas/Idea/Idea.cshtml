@@ -48,11 +48,13 @@
              <h3>Comments</h3>
              @foreach (var comment in Model.IdeaComments)
              {
+
+                 var commentvoted = comment.CommentUpDoots.Any(i => i.Id == UserManager.GetUserId(User));
              <div class="row" style="margin-top:15px;">
                  <div class="col-xs-4 text-center" style="width:140px;">
                      <div class="text-center pull-left">
-                         <i class="glyphicon glyphicon-chevron-up upvote" onmousedown="upvote(@Model.IdeaId)"></i><br />
-                         <span id="">123</span>
+                         <i id="vote-icon-comment-@comment.IdeaCommentId" class="glyphicon glyphicon-chevron-up upvote @(commentvoted ? "voted" : "")" onmousedown="upvoteComment(@comment.IdeaCommentId)"></i><br />
+                         <span id="upvoteCommentCount-@comment.IdeaCommentId">@comment.CommentUpDoots.Count</span>
                      </div>
                      <img class="pull-left" style="border-radius:50%; height: 60px; width: 60px; object-fit: cover; margin-left: 15px;" src="/images/headshot.png" alt="Profile Picture" />
                  </div>
@@ -68,3 +70,29 @@
     </div>
     </div>
 </div>
+
+
+<script>
+    function upvoteComment(ideaCommentId) {
+        console.log(event)
+        event.stopPropagation()
+        event.preventDefault()
+         fetch('@Url.Action("Upvote")', {
+             method: 'POST',
+             headers: { "Content-type": "application/json" },             
+             body: ideaCommentId
+        })
+        .then(res => {
+            if (res.status === 200) {
+                const ele = document.getElementById(`upvoteCommentCount-${ideaCommentId}`)
+                const count = ele.innerHTML
+                ele.innerHTML = +count + 1;
+                const vicon = document.getElementById(`vote-icon-comment-${ideaCommentId}`);
+                vicon.classList.add("voted"); 
+            }
+        })
+    }
+
+
+
+</script>

@@ -28,10 +28,12 @@ namespace eideas.IdeaController
             }
 
             Idea idea = db.Ideas
-                          .Include(i => i.IdeaUpdoots)
-                          .Include(i => i.IdeaComments)
+                          .Include(i => i.IdeaUpdoots)                          
+                          .Include(i => i.IdeaComments)                          
                           .ThenInclude(ic => ic.EIdeasUser)
                           .First(i => i.IdeaId == ideaId);
+
+            idea.IdeaComments = db.IdeaComments.Where(a => a.IdeaId == idea.IdeaId).Include(i=> i.CommentUpDoots).ToList();
 
             return View("~/Idea/Idea.cshtml", idea);
         }
@@ -52,6 +54,30 @@ namespace eideas.IdeaController
             db.SaveChanges();
 
             return RedirectToAction("Index", ideaId);
+        }
+
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Upvote([FromBody] int ideaCommentId)
+        {
+            var uid = userManager.GetUserId(HttpContext.User);
+            EIdeasUser user = await userManager.FindByIdAsync(uid);
+
+            IdeaComment ideaComment = db.IdeaComments.First(a=> a.IdeaCommentId == ideaCommentId);
+
+            CommentUpDoot commentUpDoot = new CommentUpDoot
+            {
+                IdeaCommentId = ideaCommentId,
+                EIdeasUser = user,
+                CreatedDate = DateTime.Now
+            };
+
+            ideaComment.CommentUpDoots.Add(commentUpDoot);
+            db.SaveChanges();
+
+            return StatusCode(200);
         }
     }
 }

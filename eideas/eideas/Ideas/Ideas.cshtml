@@ -16,9 +16,12 @@
             @*<label for="unit" class="cols-sm-2 control-label">Unit</label>*@
             <div class="cols-sm-6">
                 <div class="input-group">
-                    <select class="form-control" id="filterIdeasDropDown">
+                    <select class="form-control" id="filterIdeasDropDown" onchange="filterIdeas()">
                         <option class="filter-option" value="TopIdeas">Top Ideas</option>
                         <option class="filter-option" value="LatestIdeas">Latest Ideas</option>
+                        <option class="filter-option" value="PDCAIdeas">PDCA</option>
+                        <option class="filter-option" value="DivisionIdeas">By Division</option>
+                        <option class="filter-option" value="UnitIdeas">By Unit</option>
                     </select>
                 </div>
             </div>

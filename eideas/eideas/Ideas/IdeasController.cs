@@ -37,6 +37,15 @@ namespace eideas.NewFolder
                     case "LatestIdeas":
                         ideas = ideas.OrderByDescending(a => a.CreatedDate).ToList();
                         break;
+                    case "PDCAIdeas":
+                        ideas = ideas.OrderByDescending(a => a.PDCA).ToList();
+                        break;
+                    case "DivisionIdeas":
+                        ideas = ideas.OrderByDescending(a => a.EIdeasUser.UserDivision.DivisionName).ToList();
+                        break;
+                    case "UnitIdeas":
+                        ideas = ideas.OrderByDescending(a => a.EIdeasUser.UserUnit.UnitName).ToList();
+                        break;
                     default:
                         break;
                 }

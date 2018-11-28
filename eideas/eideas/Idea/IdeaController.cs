@@ -55,6 +55,30 @@ namespace eideas.IdeaController
 
             return RedirectToAction("Index", ideaId);
         }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Idea/{ideaId:int}/EditIdea")]
+        public IActionResult EditIdea(Idea editedIdea, int ideaId)
+        {
+            var entity = db.Ideas.FirstOrDefault(item => item.IdeaId == ideaId);
+            entity.IdeaName = editedIdea.IdeaName;
+            entity.IdeaContent = editedIdea.IdeaContent;
+            db.Ideas.Update(entity);
+            db.SaveChanges();
+          return Redirect("/Idea/"+ideaId);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Idea/{ideaId:int}/DeleteIdea")]
+        public IActionResult DeleteIdea(int ideaId)
+        {
+            var entity = db.Ideas.FirstOrDefault(item => item.IdeaId == ideaId);
+            db.Ideas.Remove(entity);
+            db.SaveChanges();
+          return Redirect("/Ideas");
+        }
         
         [Authorize]
         [HttpPost]
@@ -98,5 +122,6 @@ namespace eideas.IdeaController
 
             return StatusCode(200);
         }
+
     }
 }

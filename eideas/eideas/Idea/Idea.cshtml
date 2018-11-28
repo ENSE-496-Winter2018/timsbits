@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using eideas.Areas.Identity.Data
 @inject UserManager<EIdeasUser> UserManager
+@using eideas.Models   
 @model Idea
 @{
     Layout = "_Layout";
@@ -39,10 +40,15 @@
             </div>
         </div>
     </div>
-
-    @Html.Partial("~/Idea/_CommentForm.cshtml", new IdeaComment())
-
-
+    @if (String.Equals(Model.CreatedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
+    {
+        <button id='button' style="background:none;border:none;">Edit</button>
+        @Html.Partial("~/Idea/_deleteForm.cshtml")
+        }
+    
+    <div style="display:none" id="newpost">
+    @Html.Partial("~/Idea/_editForm.cshtml", new IdeaModel())
+    </div>
      <div class="row">
          <div class="col-xs-12">
              <h3>Comments</h3>
@@ -67,6 +73,8 @@
              </div>
              }
          </div>
+         @Html.Partial("~/Idea/_CommentForm.cshtml", new IdeaComment())
+
     </div>
     </div>
 </div>
@@ -113,6 +121,28 @@
         })
     }
 
+var button = document.getElementById('button');
 
+button.onclick = function() {
+    var div = document.getElementById('newpost');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+    }
+};
+
+var button2 = document.getElementById('button2');
+
+button2.onclick = function() {
+    var div = document.getElementById('newpost');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+    }
+};
 
 </script>

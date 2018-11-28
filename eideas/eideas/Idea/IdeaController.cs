@@ -55,12 +55,31 @@ namespace eideas.IdeaController
 
             return RedirectToAction("Index", ideaId);
         }
+        
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Upvote([FromBody] int ideaId) {
+            var uid = userManager.GetUserId(HttpContext.User);
+            EIdeasUser user = await userManager.FindByIdAsync(uid);
 
+            Idea idea = db.Ideas.First(i => i.IdeaId == ideaId);
+
+            IdeaUpDoot ideaUpDoot = new IdeaUpDoot
+            {
+                IdeaId = ideaId,
+                EideasUser = user
+            };
+
+            idea.IdeaUpdoots.Add(ideaUpDoot);
+            db.SaveChanges();
+
+            return StatusCode(200);
+        }
 
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Upvote([FromBody] int ideaCommentId)
+        public async Task<IActionResult> UpvoteComment([FromBody] int ideaCommentId)
         {
             var uid = userManager.GetUserId(HttpContext.User);
             EIdeasUser user = await userManager.FindByIdAsync(uid);

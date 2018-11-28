@@ -14,14 +14,14 @@ namespace eideas.NewFolder
     {
         readonly ApplicationDbContext db;
         readonly UserManager<EIdeasUser> userManager;
-
+ 
         public IdeasController(ApplicationDbContext context, UserManager<EIdeasUser> _userManager)
         {
             db = context;
             userManager = _userManager;
         }
 
-
+        [Authorize]
         public IActionResult Index(string filter)
         {
 

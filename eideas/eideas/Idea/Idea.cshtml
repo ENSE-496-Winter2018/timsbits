@@ -73,11 +73,31 @@
 
 
 <script>
+    function upvote(ideaId) {
+        console.log(event)
+        event.stopPropagation()
+        event.preventDefault()
+        fetch('@Url.Action("Upvote")', {
+        method: 'POST',
+        headers: { "Content-type": "application/json" },
+        body: ideaId //JSON.stringify({IdeaId: ideaId})
+        })
+        .then(res => {
+            if (res.status === 200) {
+                const ele = document.getElementById(`upvoteCount-${ideaId}`)
+                const count = ele.innerHTML
+                ele.innerHTML = +count + 1;
+                const vicon = document.getElementById(`vote-icon-${ideaId}`);
+                vicon.classList.add("voted");
+            }
+        })
+    }
+
     function upvoteComment(ideaCommentId) {
         console.log(event)
         event.stopPropagation()
         event.preventDefault()
-         fetch('@Url.Action("Upvote")', {
+         fetch('@Url.Action("UpvoteComment")', {
              method: 'POST',
              headers: { "Content-type": "application/json" },             
              body: ideaCommentId

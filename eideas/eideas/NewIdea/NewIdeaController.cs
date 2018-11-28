@@ -1,8 +1,12 @@
 ﻿using System;
 using eideas.Areas.Identity.Data;
 using eideas.Data;
+using eideas.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace eideas.Views.NewIdea
 {
@@ -17,8 +21,12 @@ namespace eideas.Views.NewIdea
         [Authorize]
         public IActionResult Index()
         {
-            return View("~/NewIdea/NewIdea.cshtml");
+            IdeaModel modelio = new IdeaModel();
+            modelio.Units = db.Units.ToList();
+            modelio.Divisions = db.Divisions.ToList();
+            return View("~/NewIdea/NewIdea.cshtml", modelio);
         }
+        
         [Authorize]
         [HttpPost]
         public IActionResult CreateNewIdea(Idea newIdea)

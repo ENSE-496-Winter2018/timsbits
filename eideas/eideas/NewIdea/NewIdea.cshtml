@@ -7,10 +7,33 @@
 @{
     Layout = "_Layout";
 }
+
 <div class="row">
     <div class="col-xs-12 col-md-8 col-md-offset-2">
         <h2>Create a New Idea</h2>
-                @UserManager.GetUserName(User) Should chaneg this to division and unit once I figure out how based on DB
+        Affecting Division: 
+       @foreach (var user in Model.Users)
+       {
+           @if (String.Equals(user.NormalizedEmail, @UserManager.GetUserName(User), StringComparison.OrdinalIgnoreCase))
+            { 
+                @foreach (var divs in Model.Divisions)
+                                                    {
+                                                        @if(divs.DivisionId == user.UserDivisionDivisionId)
+                                                        {
+                                                            @divs.DivisionName
+                                                        }
+                                                    }
+                                                    <text> And Unit: </text>
+                                                     @foreach (var units in Model.Units)
+                                                    {
+                                                        @if(units.UnitId == user.UserUnitUnitId)
+                                                        {
+                                                            @units.UnitName
+                                                        }
+                                                    }
+            }
+       }
+           
         <form action="@Url.Action("CreateNewIdea")" method="post" class="form-horizontal">
             <div class="form-group">
                 <label for="IdeaName" class="col-sm-2 control-label">Name</label>

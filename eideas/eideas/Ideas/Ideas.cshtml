@@ -1,7 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using eideas.Areas.Identity.Data
 @inject UserManager<EIdeasUser> UserManager
-@model ICollection<Idea>
+@using eideas.Models;
+@model IdeaModel
 @{
     Layout = "_Layout";
 }
@@ -10,7 +11,7 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
 
-        <h1>Latest Ideas</h1>
+        <h1>Ideas</h1>
 
         <div class="form-group">
             @*<label for="unit" class="cols-sm-2 control-label">Unit</label>*@
@@ -28,7 +29,7 @@
          
         </div>
 
-        @foreach (var idea in Model)
+        @foreach (var idea in Model.Ideas)
         {
             var voted = idea.IdeaUpdoots.Any(i => i.Id == UserManager.GetUserId(User));
             <div class="idea panel panel-default" onclick="viewIdea(@idea.IdeaId)">
@@ -45,8 +46,30 @@
                             <h3>@idea.IdeaName&nbsp;</h3>
                             <p>@idea.IdeaContent</p>
                             <p class="small">
-                                Submitted by @idea.CreatedBy<br />
-                                @idea.CreatedDate.ToString("hh:mmtt - MM/dd/yyyy")
+                                Submitted by @idea.CreatedBy
+                                <br/>
+                                 @foreach (var user in Model.Users)
+                                            {
+                                                @if (String.Equals(idea.CreatedBy, user.UserName, StringComparison.OrdinalIgnoreCase))
+                                                {
+                                                    @foreach (var divs in Model.Divisions)
+                                                    {
+                                                        @if(divs.DivisionId == user.UserDivisionDivisionId)
+                                                        {
+                                                            @divs.DivisionName
+                                                        }
+                                                    }
+                                                    <text> - </text>
+                                                     @foreach (var units in Model.Units)
+                                                    {
+                                                        @if(units.UnitId == user.UserUnitUnitId)
+                                                        {
+                                                            @units.UnitName
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            <br/>@idea.CreatedDate.ToString("hh:mmtt - MM/dd/yyyy")
                             </p>
                         </div>
                     </div>

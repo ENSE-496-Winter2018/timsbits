@@ -22,8 +22,10 @@ namespace eideas.Views.NewIdea
         public IActionResult Index()
         {
             IdeaModel modelio = new IdeaModel();
+            modelio.Users = db.Users.ToList();
             modelio.Units = db.Units.ToList();
             modelio.Divisions = db.Divisions.ToList();
+            
             return View("~/NewIdea/NewIdea.cshtml", modelio);
         }
         

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using eideas.Models;
 
 namespace eideas.NewFolder
 {
@@ -24,27 +25,30 @@ namespace eideas.NewFolder
         [Authorize]
         public IActionResult Index(string filter)
         {
-
-            ICollection<Idea> ideas = db.Ideas.Include(i => i.IdeaUpdoots).ToList();
+            IdeaModel modelio = new IdeaModel();
+            modelio.Users = db.Users.ToList();
+            modelio.Units = db.Units.ToList();
+            modelio.Divisions = db.Divisions.ToList();
+            modelio.Ideas = db.Ideas.Include(i => i.IdeaUpdoots).ToList();
 
             if (filter != null)
             {
                 switch (filter)
                 {
                     case "TopIdeas":
-                        ideas = ideas.OrderByDescending(a => a.IdeaUpdoots.Count()).ToList();
+                        modelio.Ideas = modelio.Ideas.OrderByDescending(a => a.IdeaUpdoots.Count()).ToList();
                         break;
                     case "LatestIdeas":
-                        ideas = ideas.OrderByDescending(a => a.CreatedDate).ToList();
+                        modelio.Ideas = modelio.Ideas.OrderByDescending(a => a.CreatedDate).ToList();
                         break;
                     case "PDCAIdeas":
-                        ideas = ideas.OrderByDescending(a => a.PDCA).ToList();
+                        modelio.Ideas = modelio.Ideas.OrderByDescending(a => a.PDCA).ToList();
                         break;
                     case "DivisionIdeas":
-                        ideas = ideas.OrderByDescending(a => a.EIdeasUser.UserDivision.DivisionName).ToList();
+                        modelio.Ideas = modelio.Ideas.OrderByDescending(a => a.EIdeasUser.UserDivision.DivisionName).ToList();
                         break;
                     case "UnitIdeas":
-                        ideas = ideas.OrderByDescending(a => a.EIdeasUser.UserUnit.UnitName).ToList();
+                        modelio.Ideas = modelio.Ideas.OrderByDescending(a => a.EIdeasUser.UserUnit.UnitName).ToList();
                         break;
                     default:
                         break;
@@ -52,7 +56,7 @@ namespace eideas.NewFolder
             }
 
 
-            return View("~/Ideas/Ideas.cshtml", ideas);
+            return View("~/Ideas/Ideas.cshtml", modelio);
         }
 
         [Authorize]

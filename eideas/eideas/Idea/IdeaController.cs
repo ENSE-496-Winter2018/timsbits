@@ -74,6 +74,8 @@ namespace eideas.IdeaController
         [Route("Idea/{ideaId:int}/DeleteIdea")]
         public IActionResult DeleteIdea(int ideaId)
         {
+            db.IdeaComments.Where(p => p.IdeaId == ideaId).ToList().ForEach(p => db.IdeaComments.Remove(p));
+            db.SaveChanges();
             var entity = db.Ideas.FirstOrDefault(item => item.IdeaId == ideaId);
             db.Ideas.Remove(entity);
             db.SaveChanges();

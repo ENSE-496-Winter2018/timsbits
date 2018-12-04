@@ -27,7 +27,9 @@ namespace eideas.NewFolder
         {
             IdeaModel modelio = new IdeaModel();
             modelio.Users = db.Users.ToList();
-            modelio.Ideas = db.Ideas.Include(i => i.IdeaUpdoots).Include(i => i.EIdeasUser).ThenInclude(ic => ic.UserDivision).Include(i => i.EIdeasUser).ThenInclude(ic => ic.UserUnit).ToList();
+            modelio.Units = db.Units.ToList();
+            modelio.Divisions = db.Divisions.ToList();
+            modelio.Ideas = db.Ideas.Include(i => i.IdeaUpdoots).ToList();
 
             if (filter != "Null")
             {

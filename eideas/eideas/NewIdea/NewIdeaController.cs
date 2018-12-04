@@ -35,6 +35,7 @@ namespace eideas.Views.NewIdea
         {
             newIdea.CreatedBy = User.Identity.Name;
             newIdea.CreatedDate = DateTime.Now;
+            newIdea.PDCA = (PDCA)1;
             db.Ideas.Add(newIdea);
             db.SaveChanges();
 

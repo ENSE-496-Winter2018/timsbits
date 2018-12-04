@@ -71,6 +71,21 @@ namespace eideas.IdeaController
 
         [Authorize]
         [HttpPost]
+        [Route("Idea/{ideaId:int}/PDCAIdea")]
+        public IActionResult PDCAIdea(int ideaId)
+        {
+            var entity = db.Ideas.FirstOrDefault(item => item.IdeaId == ideaId);
+            if (entity.PDCA != PDCA.done)
+            {
+            entity.PDCA = (PDCA)(1 + (int)entity.PDCA);
+            }
+            db.Ideas.Update(entity);
+            db.SaveChanges();
+          return Redirect("/Idea/"+ideaId);
+        }
+
+        [Authorize]
+        [HttpPost]
         [Route("Idea/{ideaId:int}/DeleteIdea")]
         public IActionResult DeleteIdea(int ideaId)
         {

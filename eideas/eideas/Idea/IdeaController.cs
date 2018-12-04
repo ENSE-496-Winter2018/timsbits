@@ -30,7 +30,7 @@ namespace eideas.IdeaController
             Idea idea = db.Ideas
                           .Include(i => i.IdeaUpdoots)                          
                           .Include(i => i.IdeaComments)                          
-               //             .ThenInclude(ic => ic.EIdeasUser)
+                            .ThenInclude(ic => ic.EIdeasUser)
                  //         .Include(i => i.EIdeasUser.UserDivision)
               //            .Include(i => i.EIdeasUser)                          
                 //            .ThenInclude(eiu => eiu.UserUnit)

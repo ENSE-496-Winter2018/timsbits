@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using eideas.Areas.Identity.Data
+@inject UserManager<EIdeasUser> UserManager
+@using eideas.Models;
+@model ICollection<LeaderboardModel>
+@{
+    Layout = "_Layout";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+
+        <h1>Leaderboards</h1>
+
+        <div class="form-group">
+            @*<label for="unit" class="cols-sm-2 control-label">Unit</label>*@
+            <div class="cols-sm-6">
+                <div class="input-group">
+                    <select class="form-control" id="filterIdeasDropDown" onchange="filterBoard()">
+                        <option class="filter-option" value="Null"></option>
+                        <option class="filter-option" value="TopUser">Top Users</option>
+                        <option class="filter-option" value="TopDivision">Top Division</option>
+                        <option class="filter-option" value="TopUnit">Top Unit</option>
+                    </select>
+                </div>
+            </div>
+         
+        </div>
+
+        @foreach (var each in Model)
+        {
+            <div class="idea panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="text-center col-sm-3" style="width:160px;">
+                            <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="images/headshot.png" alt="Profile Picture" />
+                        </div>
+                        <div class="col-xs-10 col-sm-6" style="margin-left: 15px; float: left;">
+                            <h3>@each.Name&nbsp;</h3> 
+                        </div>
+                        <div class="col-xs-2 col-sm-3" style="margin-left: 15px; float: left;">
+                            <h3>Total Points:  @each.points  </h3>
+                        </div>
+                        
+                    </div>
+                   
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+        
+
+
+<script>
+
+    function filterBoard() {
+        var dd = document.getElementById("filterIdeasDropDown");
+        var selectedVal = dd.options[dd.selectedIndex].value;
+
+        window.location.href = "/Leaderboard?filter=" + selectedVal;
+    }
+</script>

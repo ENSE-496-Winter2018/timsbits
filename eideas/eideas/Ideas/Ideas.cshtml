@@ -1,0 +1,133 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using eideas.Areas.Identity.Data
+@inject UserManager<EIdeasUser> UserManager
+@using eideas.Models;
+@model IdeaModel
+@{
+    Layout = "_Layout";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+
+        <h1>Ideas</h1>
+
+        <div class="form-group">
+            @*<label for="unit" class="cols-sm-2 control-label">Unit</label>*@
+            <div class="cols-sm-6">
+                <div class="input-group">
+                    <select class="form-control" id="filterIdeasDropDown" onchange="filterIdeas()">
+                        <option class="filter-option" value="Null"></option>
+                        <option class="filter-option" value="TopIdeas">Top Ideas</option>
+                        <option class="filter-option" value="LatestIdeas">Latest Ideas</option>
+                        <option class="filter-option" value="PDCAIdeas">PDCA</option>
+                        <option class="filter-option" value="DivisionIdeas">By Division</option>
+                        <option class="filter-option" value="UnitIdeas">By Unit</option>
+                    </select>
+                </div>
+            </div>
+         
+        </div>
+
+        @foreach (var idea in Model.Ideas)
+        {
+            var voted = idea.IdeaUpdoots.Any(i => i.Id == UserManager.GetUserId(User));
+            <div class="idea panel panel-default" onclick="viewIdea(@idea.IdeaId)">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="text-center col-sm-3" style="width:160px;">
+                            <div class="text-center pull-left" style="margin-top:15px;">
+                                <i id="vote-icon-@idea.IdeaId" class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onclick="upvote(@idea.IdeaId)"></i><br />
+                                <span id="upvoteCount-@idea.IdeaId">@idea.IdeaUpdoots.Count</span>
+                            </div>
+                            <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="images/headshot.png" alt="Profile Picture" />
+                        </div>
+                        <div class="col-xs-11 col-sm-9" style="margin-left: 15px; float: left;">
+                            <h3>@idea.IdeaName&nbsp;</h3>
+                            <p>@idea.IdeaContent</p>
+                            <p class="small">
+                                Submitted by @idea.CreatedBy
+                                <br/>
+                                 @foreach (var user in Model.Users)
+                                            {
+                                                @if (String.Equals(idea.CreatedBy, user.UserName, StringComparison.OrdinalIgnoreCase))
+                                                {
+                                                    @foreach (var divs in Model.Divisions)
+                                                    {
+                                                        @if(divs.DivisionId == user.UserDivisionDivisionId)
+                                                        {
+                                                            @divs.DivisionName
+                                                        }
+                                                    }
+                                                    <text> - </text>
+                                                     @foreach (var units in Model.Units)
+                                                    {
+                                                        @if(units.UnitId == user.UserUnitUnitId)
+                                                        {
+                                                            @units.UnitName
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            <br/>@idea.CreatedDate.ToString("hh:mmtt - MM/dd/yyyy")
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12">
+                        <div class="col-xs-3 pdca text-center @(idea.PDCA == PDCA.plan ? "plan" : "") @(idea.PDCA > PDCA.plan ? "done" : "")">
+                Plan
+            </div>
+            <div class="col-xs-3 pdca text-center @(idea.PDCA == PDCA.@do ? "do" : "") @(idea.PDCA > PDCA.@do ? "done" : "")">
+                Do
+            </div>
+            <div class="col-xs-3 pdca text-center @(idea.PDCA == PDCA.check ? "check" : "") @(idea.PDCA > PDCA.check ? "done" : "")">
+                Check
+            </div>
+            <div class="col-xs-3 pdca text-center @(idea.PDCA == PDCA.act ? "act" : "") @(idea.PDCA > PDCA.act ? "done" : "")">
+                Act
+            </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+        
+
+
+<script>
+    function upvote(ideaId) {
+        console.log(event)
+        event.stopPropagation()
+        event.preventDefault()
+        fetch('@Url.Action("Upvote")', {
+        method: 'POST',
+        headers: { "Content-type": "application/json" },
+        body: ideaId //JSON.stringify({IdeaId: ideaId})
+        })
+        .then(res => {
+            if (res.status === 200) {
+                const ele = document.getElementById(`upvoteCount-${ideaId}`)
+                const count = ele.innerHTML
+                ele.innerHTML = +count + 1;
+                const vicon = document.getElementById(`vote-icon-${ideaId}`);
+                vicon.classList.add("voted");
+            }
+        })
+    }
+
+    function viewIdea(ideaId) {
+        window.location.href = `/Idea/${ideaId}`
+    }
+
+    function filterIdeas() {
+        var dd = document.getElementById("filterIdeasDropDown");
+        var selectedVal = dd.options[dd.selectedIndex].value;
+
+        window.location.href = "/Ideas?filter=" + selectedVal;
+    }
+</script>

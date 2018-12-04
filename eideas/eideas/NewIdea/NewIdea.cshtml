@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using eideas.Areas.Identity.Data
+@using eideas.Models
+@inject SignInManager<EIdeasUser> SignInManager
+@inject UserManager<EIdeasUser> UserManager
+@model IdeaModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <h2>Create a New Idea</h2>
+        Affecting Division: 
+       @foreach (var user in Model.Users)
+       {
+           @if (String.Equals(user.NormalizedEmail, @UserManager.GetUserName(User), StringComparison.OrdinalIgnoreCase))
+            { 
+                @foreach (var divs in Model.Divisions)
+                                                    {
+                                                        @if(divs.DivisionId == user.UserDivisionDivisionId)
+                                                        {
+                                                            @divs.DivisionName
+                                                        }
+                                                    }
+                                                    <text> And Unit: </text>
+                                                     @foreach (var units in Model.Units)
+                                                    {
+                                                        @if(units.UnitId == user.UserUnitUnitId)
+                                                        {
+                                                            @units.UnitName
+                                                        }
+                                                    }
+            }
+       }
+           
+        <form action="@Url.Action("CreateNewIdea")" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="IdeaName" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="IdeaName" name="IdeaName" placeholder="Enter an idea title">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="IdeaContent" class="col-sm-2 control-label">Body</label>
+                <div class="col-sm-10">
+                    <textarea type="text" class="form-control" id="IdeaContent" name="IdeaContent" placeholder="Enter additional information about the idea"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit Idea</button>
+                    <button href="/Ideas" class="btn btn-link">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

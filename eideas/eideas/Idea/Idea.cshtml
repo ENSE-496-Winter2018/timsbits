@@ -1,0 +1,160 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using eideas.Areas.Identity.Data
+@inject UserManager<EIdeasUser> UserManager
+@using eideas.Models   
+@model Idea
+@{
+    Layout = "_Layout";
+}
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h3>Idea #@Model.IdeaId</h3>
+
+    @{var voted = Model.IdeaUpdoots.Any(i => i.Id == UserManager.GetUserId(User));}
+    <div class="row">
+        <div class="col-sm-3 text-center" style="width:160px;">
+            <div class="text-center pull-left" style="margin-top:15px;">
+                <i class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onmousedown="upvote(@Model.IdeaId)"></i><br />
+                <span id="upvoteCount-@Model.IdeaId">@Model.IdeaUpdoots.Count</span>
+            </div>
+            <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="/images/headshot.png" alt="Profile Picture" />
+        </div>
+        <div class="col-sm-9 col-xs-12" id="OGIdeaName"><h3>@Model.IdeaName&nbsp;</h3></div>
+                                                        Submitted by @Model.CreatedBy
+           <div class="col-sm-9 col-xs-12" id="OGIdeaContent">  <p>@Model.IdeaContent</p> </div>
+    </div>
+    <div class="row" style="margin-top:15px;">
+        <div class="col-xs-12">
+            <div class="col-xs-2 pdca text-center @(Model.PDCA == PDCA.plan ? "plan" : "") @(Model.PDCA > PDCA.plan ? "done" : "")">
+                Plan
+            </div>
+            <div class="col-xs-2 pdca text-center @(Model.PDCA == PDCA.@do ? "do" : "") @(Model.PDCA > PDCA.@do ? "done" : "")">
+                Do
+            </div>
+            <div class="col-xs-2 pdca text-center @(Model.PDCA == PDCA.check ? "check" : "") @(Model.PDCA > PDCA.check ? "done" : "")">
+                Check
+            </div>
+            <div class="col-xs-2 pdca text-center @(Model.PDCA == PDCA.act ? "act" : "") @(Model.PDCA > PDCA.act ? "done" : "")">
+                Act
+            </div>
+            @if (String.Equals(Model.CreatedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                <div class="col-xs-3">
+                    <form action="@Url.Action("PDCAIdea")" method="post" class="form-horizontal">
+                    <button id='button3' type="submit" style="background:none;border:none;">Update PDCA</button>
+                    </form>
+                </div>
+            }
+            
+        </div>
+    </div>
+    @if (String.Equals(Model.CreatedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
+    {
+        <button id='button' style="background:none;border:none;">Edit Idea</button>
+        @Html.Partial("~/Idea/_deleteForm.cshtml")
+    }
+    
+    <div style="display:none" id="newpost">
+    @Html.Partial("~/Idea/_editForm.cshtml", new IdeaModel())
+    </div>
+     <div class="row">
+         <div class="col-xs-12">
+             <h3>Comments</h3>
+             @foreach (var comment in Model.IdeaComments)
+             {
+
+                 var commentvoted = comment.CommentUpDoots.Any(i => i.Id == UserManager.GetUserId(User));
+             <div class="row" style="margin-top:15px;">
+                 <div class="col-xs-4 text-center" style="width:140px;">
+                     <div class="text-center pull-left">
+                         <i id="vote-icon-comment-@comment.IdeaCommentId" class="glyphicon glyphicon-chevron-up upvote @(commentvoted ? "voted" : "")" onmousedown="upvoteComment(@comment.IdeaCommentId)"></i><br />
+                         <span id="upvoteCommentCount-@comment.IdeaCommentId">@comment.CommentUpDoots.Count</span>
+                     </div>
+                     <img class="pull-left" style="border-radius:50%; height: 60px; width: 60px; object-fit: cover; margin-left: 15px;" src="/images/headshot.png" alt="Profile Picture" />
+                 </div>
+                 <div class="col-xs-8">
+                     <h4>@comment.Comment &nbsp;</h4>
+                     <p class="small">@comment.EIdeasUser.Email at @comment.CreatedDate.ToString("hh:mmtt - MM/dd/yyyy")</p>
+                      <hr/>
+                 </div>
+
+             </div>
+             }
+         </div>
+         @Html.Partial("~/Idea/_CommentForm.cshtml", new IdeaComment())
+
+    </div>
+    </div>
+</div>
+
+
+<script>
+    function upvote(ideaId) {
+        console.log(event)
+        event.stopPropagation()
+        event.preventDefault()
+        fetch('@Url.Action("Upvote")', {
+        method: 'POST',
+        headers: { "Content-type": "application/json" },
+        body: ideaId //JSON.stringify({IdeaId: ideaId})
+        })
+        .then(res => {
+            if (res.status === 200) {
+                const ele = document.getElementById(`upvoteCount-${ideaId}`)
+                const count = ele.innerHTML
+                ele.innerHTML = +count + 1;
+                const vicon = document.getElementById(`vote-icon-${ideaId}`);
+                vicon.classList.add("voted");
+            }
+        })
+    }
+
+    function upvoteComment(ideaCommentId) {
+        console.log(event)
+        event.stopPropagation()
+        event.preventDefault()
+         fetch('@Url.Action("UpvoteComment")', {
+             method: 'POST',
+             headers: { "Content-type": "application/json" },             
+             body: ideaCommentId
+        })
+        .then(res => {
+            if (res.status === 200) {
+                const ele = document.getElementById(`upvoteCommentCount-${ideaCommentId}`)
+                const count = ele.innerHTML
+                ele.innerHTML = +count + 1;
+                const vicon = document.getElementById(`vote-icon-comment-${ideaCommentId}`);
+                vicon.classList.add("voted"); 
+            }
+        })
+    }
+
+var button = document.getElementById('button');
+
+button.onclick = function() {
+    var div = document.getElementById('newpost');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+        var x = document.getElementById('OGIdeaName').textContent;
+        document.getElementById("IdeaName").value = x;
+        var y = document.getElementById('OGIdeaContent').textContent;
+        document.getElementById("IdeaContent").value = y;
+    }
+};
+
+var button2 = document.getElementById('button2');
+
+button2.onclick = function() {
+    var div = document.getElementById('newpost');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+    }
+};
+
+</script>

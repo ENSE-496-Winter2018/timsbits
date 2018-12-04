@@ -22,13 +22,11 @@ namespace eideas.Areas.Identity.Data
 
         public DateTime UpdatedDate { get; set; }
 
-        //PDCA
         public PDCA PDCA { get; set; }
-        //Please make this work
 
         public bool IsActive { get; set; }
 
-        public virtual ICollection<IdeaComment> IdeaComments { get; set; }
+        public ICollection<IdeaComment> IdeaComments { get; set; }
 
         public ICollection<IdeaSubscription> IdeaSubscriptions { get; set; }
 
@@ -36,5 +34,10 @@ namespace eideas.Areas.Identity.Data
 
         public EIdeasUser EIdeasUser { get; set; }
 
+
+        public Idea() {
+            IdeaUpdoots = new HashSet<IdeaUpDoot>();
+            IdeaComments = new HashSet<IdeaComment>();
+        }
     }
 }

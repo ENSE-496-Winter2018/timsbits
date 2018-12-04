@@ -85,6 +85,7 @@ namespace eideas.NewFolder
                         }
                         break;
                     case "TopUser":
+                    case "Null":
                     default:
                        foreach (EIdeasUser newName in localUsers)
                         {

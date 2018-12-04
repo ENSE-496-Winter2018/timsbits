@@ -19,10 +19,8 @@
             </div>
             <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="/images/headshot.png" alt="Profile Picture" />
         </div>
-        <div class="col-sm-9 col-xs-12">
-            <h3>@Model.IdeaName&nbsp;</h3>
-            <p>@Model.IdeaContent</p>
-        </div>
+        <div class="col-sm-9 col-xs-12" id="OGIdeaName"><h3>@Model.IdeaName&nbsp;</h3></div>
+           <div class="col-sm-9 col-xs-12" id="OGIdeaContent">  <p>@Model.IdeaContent</p> </div>
     </div>
     <div class="row" style="margin-top:15px;">
         <div class="col-xs-12">
@@ -130,6 +128,10 @@ button.onclick = function() {
     }
     else {
         div.style.display = 'block';
+        var x = document.getElementById('OGIdeaName').textContent;
+        document.getElementById("IdeaName").value = x;
+        var y = document.getElementById('OGIdeaContent').textContent;
+        document.getElementById("IdeaContent").value = y;
     }
 };
 

@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace eideas.Views.NewIdea
 {
     public class NewIdeaController : Controller
     {
         readonly ApplicationDbContext db;
+        readonly UserManager<EIdeasUser> userManager;
 
-        public NewIdeaController(ApplicationDbContext context)
+        public NewIdeaController(ApplicationDbContext context, UserManager<EIdeasUser> _userManager)
         {
             db = context;
+            userManager = _userManager;
         }
         [Authorize]
         public IActionResult Index()
@@ -31,11 +34,15 @@ namespace eideas.Views.NewIdea
         
         [Authorize]
         [HttpPost]
-        public IActionResult CreateNewIdea(Idea newIdea)
+        public async Task<IActionResult> CreateNewIdea(Idea newIdea)
         {
             newIdea.CreatedBy = User.Identity.Name;
             newIdea.CreatedDate = DateTime.Now;
             newIdea.PDCA = (PDCA)1;
+
+            var uid = userManager.GetUserId(HttpContext.User);
+            newIdea.EIdeasUser = await userManager.FindByIdAsync(uid);
+
             db.Ideas.Add(newIdea);
             db.SaveChanges();
 

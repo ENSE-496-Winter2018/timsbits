@@ -29,7 +29,7 @@ namespace eideas.NewFolder
             modelio.Users = db.Users.ToList();
             modelio.Units = db.Units.ToList();
             modelio.Divisions = db.Divisions.ToList();
-            modelio.Ideas = db.Ideas.Include(i => i.IdeaUpdoots).ToList();
+            modelio.Ideas = db.Ideas.Include(i => i.IdeaUpdoots).Include(i=> i.EIdeasUser).ToList();
 
             if (filter != "Null")
             {
@@ -45,10 +45,10 @@ namespace eideas.NewFolder
                         modelio.Ideas = modelio.Ideas.OrderByDescending(a => a.PDCA).ToList();
                         break;
                     case "DivisionIdeas":
-                        modelio.Ideas = modelio.Ideas.OrderByDescending(a => a.EIdeasUser.UserDivision.DivisionName).ToList();
+                        modelio.Ideas = modelio.Ideas.OrderBy(a => a.EIdeasUser.UserDivision.DivisionName).ToList();
                         break;
                     case "UnitIdeas":
-                        modelio.Ideas = modelio.Ideas.OrderByDescending(a => a.EIdeasUser.UserUnit.UnitName).ToList();
+                        modelio.Ideas = modelio.Ideas.OrderBy(a => a.EIdeasUser.UserUnit.UnitName).ToList();
                         break;
                     default:
                         break;

@@ -19,8 +19,9 @@
             </div>
             <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="/images/headshot.png" alt="Profile Picture" />
         </div>
-        <div class="col-sm-9 col-xs-12" id="OGIdeaName"><h3>@Model.IdeaName&nbsp;</h3></div>
-                                                        Submitted by @Model.CreatedBy
+        <div class="col-sm-9 col-xs-12" id="OGIdeaName"><h3>@Model.IdeaName&nbsp;</h3> <h5> Submitted by @Model.CreatedBy </h5></div>
+            
+            <br> </br>
            <div class="col-sm-9 col-xs-12" id="OGIdeaContent">  <p>@Model.IdeaContent</p> </div>
     </div>
     <div class="row" style="margin-top:15px;">
@@ -41,7 +42,7 @@
             {
                 <div class="col-xs-3">
                     <form action="@Url.Action("PDCAIdea")" method="post" class="form-horizontal">
-                    <button id='button3' type="submit" style="background:none;border:none;">Update PDCA</button>
+                    <button id='button3' type="submit" style="background:none;border:none;">Increment PDCA</button>
                     </form>
                 </div>
             }
@@ -50,9 +51,16 @@
     </div>
     @if (String.Equals(Model.CreatedBy, User.Identity.Name, StringComparison.OrdinalIgnoreCase))
     {
-        <button id='button' style="background:none;border:none;">Edit Idea</button>
+        <button id='button' type="submit" class="btn btn-primary">Edit Idea</button>
+        <button id='button69' type="submit" class="btn btn-primary">Subscribe to Idea</button>
+        <form id='deleteForm' action="@Url.Action("DeleteIdea")" method="post" class="form-inline">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
         @Html.Partial("~/Idea/_deleteForm.cshtml")
     }
+
+        
+
     
     <div style="display:none" id="newpost">
     @Html.Partial("~/Idea/_editForm.cshtml", new IdeaModel())

@@ -339,3 +339,7 @@ input::-webkit-input-placeholder {
 #welcome-panel{
     margin-top: 100px;
 }
+
+#deleteForm {
+    display: inline-block; 
+}

@@ -35,5 +35,9 @@
     <Content Remove="Views\Home\Commented.cshtml" />
     <Content Remove="wwwroot\images\Screen Shot 2018-10-30 at 4.22.15 PM.png" />
     <Content Remove="wwwroot\images\headshot.png" />
+    <Content Remove="wwwroot\images\nopic.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\images\nopic.jpg" />
   </ItemGroup>
 </Project>

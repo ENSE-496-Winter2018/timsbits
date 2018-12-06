@@ -10,13 +10,15 @@ namespace eideas.Models
     {
         public int points { get; set; }
         public string Name { get; set; }
+        public string Picture { get; set; }
         public LeaderboardModel()
         {
         }
-        public LeaderboardModel(int p, string n)
+        public LeaderboardModel(int p, string n, string pi)
         {
         	points = p;
         	Name = n;
+            Picture = pi;
         }
     }
 }

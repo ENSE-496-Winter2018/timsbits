@@ -57,7 +57,7 @@ namespace eideas.NewFolder
                                     }
                                 }
                             }
-                            list.Add(new LeaderboardModel(divPoints, division.DivisionName));
+                            list.Add(new LeaderboardModel(divPoints, division.DivisionName, null));
                         }
                         break;
                     case "TopUnit":
@@ -81,7 +81,7 @@ namespace eideas.NewFolder
                                     }
                                 }
                             }
-                            list.Add(new LeaderboardModel(unitPoints, unit.UnitName));
+                            list.Add(new LeaderboardModel(unitPoints, unit.UnitName, null));
                         }
                         break;
                     case "TopUser":
@@ -106,7 +106,7 @@ namespace eideas.NewFolder
                                      userPoints += comment.CommentUpDoots.Count();
                                 }
                             }
-                            list.Add(new LeaderboardModel(userPoints, newName.NormalizedEmail));
+                            list.Add(new LeaderboardModel(userPoints, newName.NormalizedEmail, newName.Picture));
                         }
                         break;
                 }

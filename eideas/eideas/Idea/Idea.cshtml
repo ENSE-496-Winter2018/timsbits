@@ -17,7 +17,14 @@
                 <i class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onmousedown="upvote(@Model.IdeaId)"></i><br />
                 <span id="upvoteCount-@Model.IdeaId">@Model.IdeaUpdoots.Count</span>
             </div>
-            <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="/images/headshot.png" alt="Profile Picture" />
+             @if (Model.EIdeasUser != null && Model.EIdeasUser.Picture.Length > 0)
+            {
+            <image class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="@Model.EIdeasUser.Picture" width="250px" />
+            }
+            else
+            {
+            <image class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="/images/nopic.jpg" width="250px" />
+            }
         </div>
         <div class="col-sm-9 col-xs-12" id="OGIdeaName"><h3>@Model.IdeaName&nbsp;</h3> <h5> Submitted by @Model.CreatedBy </h5></div>
             
@@ -78,7 +85,14 @@
                          <i id="vote-icon-comment-@comment.IdeaCommentId" class="glyphicon glyphicon-chevron-up upvote @(commentvoted ? "voted" : "")" onmousedown="upvoteComment(@comment.IdeaCommentId)"></i><br />
                          <span id="upvoteCommentCount-@comment.IdeaCommentId">@comment.CommentUpDoots.Count</span>
                      </div>
-                     <img class="pull-left" style="border-radius:50%; height: 60px; width: 60px; object-fit: cover; margin-left: 15px;" src="/images/headshot.png" alt="Profile Picture" />
+                      @if (comment.EIdeasUser != null && comment.EIdeasUser.Picture.Length > 0)
+                        {
+                        <image class="pull-left" style="border-radius:50%; height: 60px; width: 60px; object-fit: cover; margin-left: 15px;" src="@comment.EIdeasUser.Picture" />
+                        }
+                        else
+                        {
+                        <image class="pull-left" style="border-radius:50%; height: 60px; width: 60px; object-fit: cover; margin-left: 15px;" src="/images/nopic.jpg" />
+                        }
                  </div>
                  <div class="col-xs-8">
                      <h4>@comment.Comment &nbsp;</h4>

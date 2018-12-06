@@ -21,6 +21,8 @@ namespace eideas.Areas.Identity.Data
 
         public Team Team { get; set; }
 
+        public string Picture { get; set; }
+
         public ICollection<IdeaComment> IdeaComments { get; set; }
 
         public ICollection<IdeaSubscription> IdeaSubscriptions { get; set; }

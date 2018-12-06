@@ -41,7 +41,14 @@
                                 <i id="vote-icon-@idea.IdeaId" class="glyphicon glyphicon-chevron-up upvote @(voted ? "voted" : "")" onclick="upvote(@idea.IdeaId)"></i><br />
                                 <span id="upvoteCount-@idea.IdeaId">@idea.IdeaUpdoots.Count</span>
                             </div>
-                            <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="images/headshot.png" alt="Profile Picture" />
+                             @if (idea.EIdeasUser != null && idea.EIdeasUser.Picture.Length > 0)
+                            {
+                            <image class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="@idea.EIdeasUser.Picture" width="250px" />
+                            }
+                            else
+                            {
+                            <image class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="/images/nopic.jpg" width="250px" />
+                            }
                         </div>
                         <div class="col-xs-11 col-sm-9" style="margin-left: 15px; float: left;">
                             <h3>@idea.IdeaName&nbsp;</h3>

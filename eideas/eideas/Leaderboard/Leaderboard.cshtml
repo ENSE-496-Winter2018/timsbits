@@ -34,7 +34,14 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="text-center col-sm-3" style="width:160px;">
-                            <img class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="images/headshot.png" alt="Profile Picture" />
+                         @if (each.Picture != null && each.Picture.Length > 0)
+                        {
+                        <image class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="@each.Picture" width="250px" />
+                        }
+                        else
+                        {
+                        <image class="pull-left" style="border-radius:50%; height: 80px; width: 80px; object-fit: cover; margin-left: 15px;" src="/images/nopic.jpg" width="250px" />
+                        }
                         </div>
                         <div class="col-xs-10 col-sm-6" style="margin-left: 15px; float: left;">
                             <h3>@each.Name&nbsp;</h3> 

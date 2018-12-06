@@ -5,6 +5,15 @@
 
 <br/><br/><br/><br/>
 
+# Tim's Bits
+
+**Contributors:** Paul Hewitt, Taylor Petrychyn, Brandon Eagan, Maks Zabutnyy, Danish Junaid
+
+**Required Documentation:**
+* [Requirements](./requirements.md)
+* [User Manual](./braintrust/manual/Tim's Bits User Manual.pdf)
+      
+
 # Braintrust
 
 **Contributors:** Reid Stancu, Simranjeet Kaur, Susmita Patel

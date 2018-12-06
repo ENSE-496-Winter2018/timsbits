@@ -7,11 +7,17 @@
 
 # Tim's Bits
 
+Internal idea management made with love for ENSE496AB in partnership with eHealth
+<br/>
+
 **Contributors:** Paul Hewitt, Taylor Petrychyn, Brandon Eagan, Maks Zabutnyy, Danish Junaid
 
 **Required Documentation:**
 * [Requirements](./requirements.md)
-* [User Manual](./braintrust/manual/Tim's Bits User Manual.pdf)
+* [User Manual](https://github.com/tpetrychyn/braintrust/blob/master/manual/Tim's%20Bits%20User%20Manual.pdf)
+* [User Questionnaire](https://github.com/tpetrychyn/braintrust/blob/master/Milestones/Milestone%204/Tim's%20Bits%20Questionnaire.pdf)
+* [Usability Data](https://github.com/tpetrychyn/braintrust/blob/master/Usability%20Data.pdf)
+* [Google Drive](https://drive.google.com/drive/folders/13rTRd1igxIQ8cjMKwD1iP0FBqwxyK9cf?usp=sharing)
       
 
 # Braintrust

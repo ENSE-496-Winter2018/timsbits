@@ -85,7 +85,7 @@
                          <i id="vote-icon-comment-@comment.IdeaCommentId" class="glyphicon glyphicon-chevron-up upvote @(commentvoted ? "voted" : "")" onmousedown="upvoteComment(@comment.IdeaCommentId)"></i><br />
                          <span id="upvoteCommentCount-@comment.IdeaCommentId">@comment.CommentUpDoots.Count</span>
                      </div>
-                      @if (comment.EIdeasUser != null && comment.EIdeasUser.Picture.Length > 0)
+                      @if (comment.EIdeasUser != null && comment.EIdeasUser.Picture != null && comment.EIdeasUser.Picture.Length > 0)
                         {
                         <image class="pull-left" style="border-radius:50%; height: 60px; width: 60px; object-fit: cover; margin-left: 15px;" src="@comment.EIdeasUser.Picture" />
                         }
